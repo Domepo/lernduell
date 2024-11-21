@@ -1,59 +1,78 @@
-# Lernduell
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+![Logo](assets/img/Banner.png)
 
-## Development server
+# Lernduell App
 
-To start a local development server, run:
+Willkommen zur Lernduell App – einem aufregenden Studentenprojekt, das Lernen in ein packendes und soziales Abenteuer verwandelt! Entwickelt mit Angular, bietet die Lernduell App eine interaktive Wissensplattform, auf der Sie Ihr Wissen mit anderen messen können 🎉
 
-```bash
-ng serve
-```
+## Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **🌟 Interaktive Quiz-Duelle**: Fordern Sie Freunde oder andere Studierende in Echtzeit heraus und testen Sie Ihr Wissen in Kategorien wie 📚 Geschichte, 🔬 Wissenschaft und 🎶 Popkultur.
+- **🧠 Bildungsinhalte**: Hochwertige Fragen mit detaillierten Erklärungen helfen Ihnen, nicht nur Antworten, sondern auch ihre Zusammenhänge zu verstehen.
+- **📊 Lernstatistiken**: Behalten Sie Ihren Fortschritt im Auge mit personalisierten Analysen und Empfehlungen, um Ihren Lernpfad zu verbessern.
+- **🏆 Level und Belohnungen**: Erreichen Sie neue Level und sammeln Sie tolle Abzeichen durch erfolgreiche Matches.
+- **👥 Gemeinschaft und Freundesliste**: Vernetzen Sie sich mit anderen Nutzern und tauschen Sie sich in der Community aus.
+- **🗂️ Karteikarten ***Importieren Sie schon bestehende Karteikarten in das Spiel
+## Installation
 
-## Code scaffolding
+1. Klonen oder laden Sie das Projekt von unserem [GitHub-Repository](https://github.com/lernduell) herunter.
+2. Navigieren Sie in das Projektverzeichnis und führen Sie `npm install` aus, um alle Abhängigkeiten zu installieren.
+3. Starten Sie den Entwicklungsserver mit `ng serve`.
+4. Öffnen Sie Ihren Browser und gehen Sie zu `http://localhost:4200/`, um die App zu nutzen.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Anforderungen
 
-```bash
-ng generate component component-name
-```
+- Node.js und npm installiert
+- Angular CLI
+- Moderne Browser (Chrome, Firefox, Safari)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Feedback und Support
 
-```bash
-ng generate --help
-```
+Dieses Projekt ist ein laufendes Vorhaben, und wir freuen uns über Ihr Feedback und Ihre Verbesserungsvorschläge. Kontaktieren Sie uns unter student.support@lernduellapp.de.
 
-## Building
+## Mitmachen
 
-To build the project run:
+Interessiert an Open-Source-Arbeit? Wir freuen uns über jede Hilfe! Schauen Sie sich unser GitHub-Repository an und tragen Sie mit Ihren Ideen bei.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Danke, dass Sie Teil unseres spannenden Projekts sind! Wir hoffen, dass Sie viel Freude und Erfolg beim Duellieren und Lernen haben. 🚀🌈# Lernduell App
 
-## Running unit tests
+Willkommen zur Lernduell App – einem aufregenden Studentenprojekt, das Lernen in ein packendes und soziales Abenteuer verwandelt! Entwickelt mit Angular, bietet die Lernduell App eine interaktive Wissensplattform, auf der Sie Ihr Wissen mit anderen messen können 🎉
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Features
 
-```bash
-ng test
-```
+- **🌟 Interaktive Quiz-Duelle**: Fordern Sie Freunde oder andere Studierende in Echtzeit heraus und testen Sie Ihr Wissen in Kategorien wie 📚 Geschichte, 🔬 Wissenschaft und 🎶 Popkultur.
+- **🧠 Bildungsinhalte**: Hochwertige Fragen mit detaillierten Erklärungen helfen Ihnen, nicht nur Antworten, sondern auch ihre Zusammenhänge zu verstehen.
+- **📊 Lernstatistiken**: Behalten Sie Ihren Fortschritt im Auge mit personalisierten Analysen und Empfehlungen, um Ihren Lernpfad zu verbessern.
+- **🏆 Level und Belohnungen**: Erreichen Sie neue Level und sammeln Sie tolle Abzeichen durch erfolgreiche Matches.
+- **👥 Gemeinschaft und Freundesliste**: Vernetzen Sie sich mit anderen Nutzern und tauschen Sie sich in der Community aus.
+- **🗂️ Karteikarten ***Importieren Sie schon bestehende Karteikarten in das Spiel
+## Installation
 
-## Running end-to-end tests
+1. Klonen oder laden Sie das Projekt von unserem [GitHub-Repository](https://github.com/lernduell) herunter.
+2. Navigieren Sie in das Projektverzeichnis und führen Sie `npm install` aus, um alle Abhängigkeiten zu installieren.
+3. Starten Sie den Entwicklungsserver mit `ng serve`.
+4. Öffnen Sie Ihren Browser und gehen Sie zu `http://localhost:4200/`, um die App zu nutzen.
 
-For end-to-end (e2e) testing, run:
+## Anforderungen
 
-```bash
-ng e2e
-```
+- Node.js und npm installiert
+- Angular CLI
+- Moderne Browser (Chrome, Firefox, Safari)
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Feedback und Support
 
-## Additional Resources
+Dieses Projekt ist ein laufendes Vorhaben, und wir freuen uns über Ihr Feedback und Ihre Verbesserungsvorschläge. Kontaktieren Sie uns unter student.support@lernduellapp.de.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Mitmachen
+
+Interessiert an Open-Source-Arbeit? Wir freuen uns über jede Hilfe! Schauen Sie sich unser GitHub-Repository an und tragen Sie mit Ihren Ideen bei.
+
+---
+
+Danke, dass Sie Teil unseres spannenden Projekts sind! Wir hoffen, dass Sie viel Freude und Erfolg beim Duellieren und Lernen haben. 🚀🌈
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
