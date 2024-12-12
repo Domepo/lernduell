@@ -31,6 +31,9 @@ jobs:
 
     - name: Verify Build Output
       run: ls -la ./dist/lernduell
+    
+    - name: Fix Permissions
+      run: chmod -R 755 ./dist
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
