@@ -30,10 +30,10 @@ jobs:
       run: npm run build
 
     - name: Verify Build Output
-      run: ls -la ./frontend/dist/lernduell
+      run: ls -la ./dist/lernduell
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./frontend/dist/lernduell
+        publish_dir: ./dist/lernduell
