@@ -28,12 +28,12 @@ jobs:
 
     - name: Build Angular App
       run: npm run build
-    
+
     - name: Verify Build Output
-      run: ls -la ./frontend/dist
+      run: ls -la ./frontend/dist/lernduell
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./frontend/dist
+        publish_dir: ./frontend/dist/lernduell
