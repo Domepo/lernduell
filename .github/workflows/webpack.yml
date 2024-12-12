@@ -34,6 +34,9 @@ jobs:
     
     - name: Fix Permissions
       run: chmod -R 755 ./dist
+    
+    - name: Verify Dist Folder
+      run: ls -Rla ./dist
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
