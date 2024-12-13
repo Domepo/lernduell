@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
-import { GameHomescreenComponent } from './pages/game-homescreen/game-homescreen.component';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [NgbAccordionModule,GameHomescreenComponent],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
 })
 export class AppComponent {}
