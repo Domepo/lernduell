@@ -28,12 +28,18 @@ jobs:
 
     - name: Build Angular App
       run: npm run build
+            
+    - name: Create file in ./dist/lernduell
+      run: touch ./dist/lernduell/test.md
 
     - name: Verify Build Output
       run: ls -la ./dist/lernduell
-      
-    - name: Create file in ./dist/lernduell
-      run: touch ./dist/lernduell/test.md
+
+    - name: Copy
+      run: cp /home/runner/work/lernduell/lernduell/dist/lernduell /home/runner/actions_github_pages_1734517644174
+
+    - name: test
+      run: ls /home/runner/actions_github_pages_1734517644174
       
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
