@@ -30,7 +30,7 @@ jobs:
       run: npm run build
             
 
-    - name: Deploy to gh pages
+    - name: Deploy to GH pages
       run: |
         npx angular-cli-ghpages --dir=dist/lernduell
       env:
