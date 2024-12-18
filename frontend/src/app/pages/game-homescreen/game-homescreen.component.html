@@ -1,56 +1,11 @@
-<style>
-  .vorderseite {
-    color: white;
-    height: 400px;
-    /* Höhe anpassen */
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    /* Schriftgröße vergrößern */
-  }
-
-  .component-backround {
-    background-color: #243b6a46;
-    color: white;
-    border-radius: 10px;
-    padding: 1px;
-  }
-
-  .card-stat {
-    background-color: #1d2d50;
-    color: white;
-    border-radius: 10px;
-    padding: 20px;
-  }
-
-  .card {
-    background-color: #243b6a;
-  }
-
-  .card-button {
-    background-color: #f9c74f;
-    color: #000;
-    padding: 8px 10px;
-    border-radius: 5px;
-  }
-
-  .game-background {
-    height: 100%;
-    min-height: 100vh;
-    width: 100%;
-    background-color: #2e4a7f;
-  }
-
-</style>
-
 <div class="game-background">
-  <div class="container text-center my-4 ">
+  <div class="container text-center py-4 ">
     <h1 style="color: white;">Spiel</h1>
 
     <div class="row mt-4">
       <!-- Linke Spalte -->
       <div class="col-md-3">
-        <div class="component-backround">
+        <div class="component-background-p1">
           <div class="p-3">
             <div class="card-stat">
               Noch 3/10 Karten
@@ -65,21 +20,20 @@
       </div>
 
       <!-- Mittlere Spalte -->
+
       <div class="col-md-6">
-
-
-        <div class="card">
-          <div class="mb-3 p-5 vorderseite">
-
-            <h2 class="mb-0">Vorderseite</h2>
-            <p>(Beim Klicken Rückseite)</p>
+        <div class="component-background">
+          <div class="card">
+            <div class="mb-3 p-5 frontside">
+              <h2 class="mb-0">Vorderseite</h2>
+              <p>(Beim Klicken Rückseite)</p>
+            </div>
+          </div>
+          <div class="py-2 d-flex justify-content-between">
+            <button class="btn card-button">Wusste ich</button>
+            <button class="btn card-button">Wusste ich nicht</button>
           </div>
         </div>
-        <div class="py-2 d-flex justify-content-between">
-          <button class="btn card-button">Wusste ich</button>
-          <button class="btn card-button">Wusste ich nicht</button>
-        </div>
-
       </div>
       <!-- Rechte Spalte -->
       <div class="col-md-3">

@@ -1,11 +1,7 @@
-<style>
-.root-background{
-  color: #243b6a46;
-}
-</style>
-<div class="root-background"> 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+<div class="root-background">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
+    <div class="container">
       <!-- Logo -->
       <a class="navbar-brand" href="#">Lernduell</a>
   
@@ -18,7 +14,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/" routerLinkActive="active">Startseite</a>
+            <a class="nav-link " routerLink="/homepage" routerLinkActive="active">Startseite</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/game-homescreen" routerLinkActive="active">Game</a>
@@ -26,14 +22,10 @@
           <li class="nav-item">
             <a class="nav-link" routerLink="/flashcard-homescreen" routerLinkActive="active">Flashcard</a>
           </li>
-
         </ul>
       </div>
     </div>
   </nav>
-
-
-
+</div>
 
 <router-outlet></router-outlet>
-</div>
