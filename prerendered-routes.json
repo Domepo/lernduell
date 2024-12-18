@@ -1,0 +1,7 @@
+{
+  "routes": {
+    "/": {},
+    "/flashcard-homescreen": {},
+    "/game-homescreen": {}
+  }
+}
