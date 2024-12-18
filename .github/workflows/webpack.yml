@@ -36,7 +36,7 @@ jobs:
 
     - name: Deploy to GH pages
       run: |
-        npx angular-cli-ghpages --dir=dist/lernduell --no-silent
+        npx angular-cli-ghpages --dir=dist/lernduell/browser --no-silent
       env:
         CI: true
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
