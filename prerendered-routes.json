@@ -1,7 +1,0 @@
-{
-  "routes": {
-    "/lernduell": {},
-    "/lernduell/flashcard-homescreen": {},
-    "/lernduell/game-homescreen": {}
-  }
-}
