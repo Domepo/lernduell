@@ -28,7 +28,11 @@ jobs:
 
     - name: Build Angular App
       run: npm run build
-            
+
+    - name: Configure Git User
+      run: |
+        git config --global user.email "dominiktb2@gmail.com"
+        git config --global user.name "Domepo"
 
     - name: Deploy to GH pages
       run: |
