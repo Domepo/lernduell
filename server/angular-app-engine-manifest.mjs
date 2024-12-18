@@ -1,6 +1,6 @@
 
 export default {
-  basePath: '/',
+  basePath: '/lernduell/',
   entryPoints: {
     '': () => import('./main.server.mjs')
   },

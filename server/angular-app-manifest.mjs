@@ -2,33 +2,33 @@
 export default {
   bootstrap: () => import('./main.server.mjs').then(m => m.default),
   inlineCriticalCss: true,
-  baseHref: '/',
+  baseHref: '/lernduell/',
   locale: undefined,
   routes: [
   {
     "renderMode": 2,
-    "route": "/"
+    "route": "/lernduell"
   },
   {
     "renderMode": 2,
-    "route": "/game-homescreen"
+    "route": "/lernduell/game-homescreen"
   },
   {
     "renderMode": 2,
-    "route": "/flashcard-homescreen"
+    "route": "/lernduell/flashcard-homescreen"
   },
   {
     "renderMode": 2,
-    "redirectTo": "/",
-    "route": "/**"
+    "redirectTo": "/lernduell",
+    "route": "/lernduell/**"
   }
 ],
   assets: {
-    'index.csr.html': {size: 4917, hash: 'e14ce3bf8f7da5c2c89dbdd4a10f0cf0c6c21b3d2311f6fc8ffbfe7eab459320', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 1016, hash: '8379bb13d94612aa13bf5da92ed74d8277bc1e26ee651a91c907691f333da1f9', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'index.html': {size: 14632, hash: '26ebde5f76c1219d9984c1d700affc87abd6a98b7898a8c41dbc6db68e36cecd', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
-    'game-homescreen/index.html': {size: 17919, hash: '8a834ee318d435831ec8803a3ccd7cccdef146a6428c02f9db53b11716407713', text: () => import('./assets-chunks/game-homescreen_index_html.mjs').then(m => m.default)},
-    'flashcard-homescreen/index.html': {size: 15443, hash: 'e38a7179f5bd5ec0c82a2e4fd4ef8ec1bc07d72b9bc6567ebb36665c4917b26f', text: () => import('./assets-chunks/flashcard-homescreen_index_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 4927, hash: 'be6b8d7e6e730a486d4b0f7e50031632d14dcbad91c629cd2db95bf1bebf3768', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 1026, hash: 'e84885fbd3e17111ed003f821db8525feb0fe84d402b429592f9d6d76d5ed975', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'index.html': {size: 14672, hash: '6f9585cbb1699e01c7893271efbced1076acc2fef6b34b9a489ddeeeff16158e', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
+    'game-homescreen/index.html': {size: 17959, hash: '35a501caa2588142b88f59458b665ee9c3568ea809311c00e1a0a1076d4b1dc2', text: () => import('./assets-chunks/game-homescreen_index_html.mjs').then(m => m.default)},
+    'flashcard-homescreen/index.html': {size: 15483, hash: '444acd99ba4ab3d98e9c300dcea8a1415d3b321f61e67e534c10fc89179520c9', text: () => import('./assets-chunks/flashcard-homescreen_index_html.mjs').then(m => m.default)},
     'styles-DZ6UBGXD.css': {size: 231612, hash: 'B2Fy9V+bfZo', text: () => import('./assets-chunks/styles-DZ6UBGXD_css.mjs').then(m => m.default)}
   },
 };
