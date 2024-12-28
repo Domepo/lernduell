@@ -1,26 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ApiService } from './api.service';
+// src/app/app.component.ts
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { SocketService } from './socket.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [FormsModule],
 })
-export class AppComponent implements OnInit {
-  configData: any;
+export class AppComponent implements OnDestroy {
 
-  constructor(private apiService: ApiService) {}
+  private messageSubscription: Subscription;
+  messages: string[] = [];
+  newMessage: string = '';
+  constructor(private socketService: SocketService) {
+    this.messageSubscription = this.socketService
+      .on('message')
+      .subscribe((data) => {
+        console.log(data);
+        this.messages.push(data.text);
+      });
+  }
 
-  ngOnInit() {
-    this.apiService.getConfig('http://127.0.0.1:8000/').subscribe(data => {
-      this.configData = data;
-      console.log(this.configData);
-      return this.configData;
-    });
+  sendMessage() {
+    this.socketService.emit('message', { text: this.newMessage });
+    this.newMessage = '';
+    
+  }
+
+  ngOnDestroy() {
+    this.messageSubscription.unsubscribe();
   }
 }
-

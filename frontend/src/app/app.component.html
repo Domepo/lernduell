@@ -1,31 +1,16 @@
-<div class="root-background">
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
-    <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand" href="#">Lernduell</a>
-  
-      <!-- Toggle-Button für mobile Ansicht -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- Navigationslinks -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link " routerLink="/homepage" routerLinkActive="active">Startseite</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/game-homescreen" routerLinkActive="active">Game</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/flashcard-homescreen" routerLinkActive="active">Flashcard {{configData}}</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<!-- src/app/app.component.html -->
+<div>
+  <h1>Real-ATime Chat</h1>
+  <div>
+    <input [(ngModel)]="newMessage" placeholder="Enter your message" />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+  <div>
+    <h2>Messages:</h2>
+    <ul>
+      @for ( message of messages; track $index) {
+      <li>{{ message }}</li>
+      }
+    </ul>
+  </div>
 </div>
-
-<router-outlet></router-outlet>

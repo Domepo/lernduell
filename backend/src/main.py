@@ -1,15 +1,26 @@
-from typing import Union
+from flask import Flask
+from flask_cors import CORS
+from flask_socketio import SocketIO
 
-from fastapi import FastAPI
+app = Flask(__name__)
+CORS(app)  # Enable CORS for all requests
+socketio = SocketIO(app, cors_allowed_origins="*")
 
-app = FastAPI()
+port = 3000
 
+# Define a route handler for the root path
+@app.route('/')
+def index():
+    return "Hello, world!"
 
-@app.get("/")
-def read_root():
-    return {"Hello": "Temst"}
+@socketio.on('connect')
+def handle_connect():
+    print("New client connected")
 
+@socketio.on('disconnect')
+def handle_disconnect():
+    print("Client disconnected")
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+# Start the server
+if __name__ == "__main__":
+    socketio.run(app, host='0.0.0.0', port=port)
