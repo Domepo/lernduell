@@ -13,21 +13,11 @@ export class SocketService {
     this.socket = io('http://localhost:3000/');
   }
 
-  emit(event: string, data: any) {
-    console.log(data);
-    this.socket.emit(event, data);
-  }
-
-  on(event: string): Observable<any> {
-    return new Observable((observer) => {
-      this.socket.on(event, (data) => {
-        observer.next(data);
-      });
-
-      // Handle cleanup
-      return () => {
-        this.socket.off(event);
-      };
-    });
+  listen(eventName: string) {
+    return new Observable((subscriber) => {
+      this.socket.on(eventName, data => {
+        subscriber.next(data)
+      })
+    })
   }
 }

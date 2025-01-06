@@ -1,16 +1,5 @@
-<!-- src/app/app.component.html -->
 <div>
-  <h1>Real-ATime Chat</h1>
-  <div>
-    <input [(ngModel)]="newMessage" placeholder="Enter your message" />
-    <button (click)="sendMessage()">Send</button>
-  </div>
-  <div>
-    <h2>Messages:</h2>
-    <ul>
-      @for ( message of messages; track $index) {
-      <li>{{ message }}</li>
-      }
-    </ul>
-  </div>
+  <h1>Real-Time Chat</h1>
+  <h2>Aktuelle Uhrzeit:</h2>
+  <p>{{ currentTime }}</p>
 </div>

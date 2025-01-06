@@ -1,37 +1,21 @@
 // src/app/app.component.ts
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { SocketService } from './socket.service';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  standalone: true,
-  imports: [FormsModule],
+  styleUrls: ['./app.component.css'], // Korrektur: styleUrls im Plural
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit {
+  currentTime: string = ''; // Property für die Uhrzeit
 
-  private messageSubscription: Subscription;
-  messages: string[] = [];
-  newMessage: string = '';
-  constructor(private socketService: SocketService) {
-    this.messageSubscription = this.socketService
-      .on('message')
-      .subscribe((data) => {
-        console.log(data);
-        this.messages.push(data.text);
-      });
-  }
+  constructor(private webSocketService: SocketService) {}
 
-  sendMessage() {
-    this.socketService.emit('message', { text: this.newMessage });
-    this.newMessage = '';
-    
-  }
-
-  ngOnDestroy() {
-    this.messageSubscription.unsubscribe();
+  ngOnInit() {
+    this.webSocketService.listen('time').subscribe((data: any) => {
+      this.currentTime = data;
+      console.log(this.currentTime);
+    });
   }
 }
