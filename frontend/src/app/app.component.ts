@@ -6,5 +6,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+
 })
 export class AppComponent {}

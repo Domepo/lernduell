@@ -29,17 +29,14 @@ jobs:
     - name: Build Angular App
       run: npm run build
 
-    - name: Verify Build Output
-      run: ls -la ./dist/lernduell
-    
-    - name: Fix Permissions
-      run: chmod -R 755 ./dist
-    
-    - name: Verify Dist Folder
-      run: ls -Rla ./dist
-      
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: /home/runner/work/lernduell/lernduell/dist/lernduell
+    - name: Configure Git User
+      run: |
+        git config --global user.email "dominiktb2@gmail.com"
+        git config --global user.name "Domepo"
+
+    - name: Deploy to GH pages
+      run: |
+        npx angular-cli-ghpages --dir=dist/lernduell/browser --no-silent
+      env:
+        CI: true
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
