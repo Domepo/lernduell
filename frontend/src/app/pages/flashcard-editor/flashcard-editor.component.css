@@ -1,0 +1,43 @@
+.container-fluid {
+    height: 100vh;
+    background-color: #2e4a7f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .row {
+    width: 100%;
+  }
+  
+  .list-group-item {
+    border-radius: 0.5rem !important; 
+    border: none !important;       
+    box-shadow: none; 
+    cursor: pointer;
+    background-color: #1d2d50;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f0ad4e;
+    color: #000;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+  
+  .rechter-Block{
+    color: white;
+  }
+
+  .Liste {
+    background-color: #243b6a46;
+    border-radius: 10px;
+    padding: 1px;
+  }
