@@ -1,28 +1,22 @@
-<div class="container text-center mt-5">
-    <!-- Titel -->
-    <h1 class="mb-5">Hauptmenü</h1>
+<div class="game-background">
+    <div class="container text-center">
+        <!-- Titel -->
+        <h1 class="mb-5 p-3" style="color: white;">Hauptmenü</h1>
 
-    <!-- Obere Kartenreihe -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-12 col-md-4">
-            <div class="card bg-light text-center p-4" style="cursor: pointer;"  routerLink="/game-homescreen" routerLinkActive="active">
-                <h2>Spielen</h2>
-            </div>
-        </div>
-        <div class="col-12 col-md-4">
-            <div class="card bg-light text-center p-4">
-                <h2>Karteikarten editieren</h2>
-            </div>
-        </div>
-    </div>
+        <!-- Obere Kartenreihe -->
 
-    <!-- Scoreboard -->
-    <div class="row justify-content-center">
-        <div class="col-8">
-            <div class="card bg-light text-center p-5">
-                <h2>Scoreboard</h2>
-                <p class="mt-3"></p>
+        <div class="container mt-5 ">
+            <div class="row justify-content-center mb-3">
+              <div class="col-4 text-center">
+                <button class="btn card-button w-100" (click)="navigateTo('/game-homescreen')">Spielen</button>
+              </div>
+              <div class="col-4 text-center">
+                <button class="btn card-button w-100 "(click)="navigateTo('/flashcard')">Karteikarten editieren</button>
+              </div>
             </div>
-        </div>
+          </div>
+          <div style="margin-top: 100px;">
+            <app-scoreboard></app-scoreboard>
+
+          </div>
     </div>
-</div>
