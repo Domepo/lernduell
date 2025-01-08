@@ -1,36 +1,62 @@
-<div class="container text-center mt-5">
-    <!-- Titel -->
-    <h1 class="mb-4">Karteikarten erstellen</h1>
+<div class="game-background">
+    <div class="container text-center py-4">
+        <h1 style="color: white;">Karteikarten erstellen</h1>
 
-    <!-- Kartenreihe -->
-    <div class="row justify-content-center mb-4">
-        <!-- Lernset erstellen Karte -->
-        <div class="col-12 col-sm-4 col-md-3 mb-3">
-            <div class="card border text-center">
-                <div class="card-body">
-                    <div class="display-1">+</div>
-                </div>
-                <div class="card-footer bg-light">Lernset erstellen</div>
-            </div>
-        </div>
+            <!-- Kartenreihe -->
+        <div class="component-background-p1">
+            <div class="p-3">
+                <div class="row justify-content-center mt-4">
 
-        <!-- Lernset bearbeiten Karte (mit Bild) -->
-        <div class="col-12 col-sm-4 col-md-3 mb-3">
-            <div class="card border text-center">
-                <div class="card-body">
-                    <img src="https://via.placeholder.com/100" class="img-fluid" alt="Lernset bearbeiten">
-                </div>
-                <div class="card-footer bg-light">Lernset Bearbeiten</div>
-            </div>
-        </div>
+                        <!-- Lernset erstellen Karte -->
+                        <div class="col-12 col-sm-4 col-md-3 mb-3">
+                            <div class="card border text-center" (click)="navigateToSet('set1')">
+                                <div class="card-body">
+                                    <div class="display-1">+</div>
+                                </div>
+                                <div class="card-footer">Lernset erstellen</div>
+                            </div>
+                        </div>
+                    
+                    <!-- Lernset bearbeiten Karte (mit Bild) -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('set2')">
+                            <div class="card-body">
+                                <img src="https://via.placeholder.com/100" class="img-fluid" alt="Lernset bearbeiten">
+                            </div>
+                            <div class="card-footer">Lernset Bearbeiten</div>
+                        </div>
+                    </div>
 
-        <!-- Lernset bearbeiten Karte (Text "SD") -->
-        <div class="col-12 col-sm-4 col-md-3 mb-3">
-            <div class="card border text-center">
-                <div class="card-body">
-                    <span class="display-1">SD</span>
+                    <!-- Lernset bearbeiten Karte (Text "SD") -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('set3')">
+                            <div class="card-body">
+                                <span class="display-1">SD</span>
+                            </div>
+                            <div class="card-footer">Lernset Bearbeiten</div>
+                        </div>
+                    </div>
+
+                    <!-- TEST -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('set4')">
+                            <div class="card-body">
+                                <span class="display-1">TEST</span>
+                            </div>
+                            <div class="card-footer">TEST</div>
+                        </div>
+                    </div>
+
+                    <!-- TEST -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('set5')">
+                            <div class="card-body">
+                                <span class="display-1">TEST</span>
+                            </div>
+                            <div class="card-footer">Test</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer bg-light">Lernset Bearbeiten</div>
             </div>
         </div>
     </div>
