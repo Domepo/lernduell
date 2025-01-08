@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlashcardEditorComponent } from './flashcard-editor.component';
+import { FlashcardComponent } from './flashcard-editor.component';
 
-describe('FlashcardEditorComponent', () => {
-  let component: FlashcardEditorComponent;
-  let fixture: ComponentFixture<FlashcardEditorComponent>;
+describe('FlashcardComponent', () => {
+  let component: FlashcardComponent;
+  let fixture: ComponentFixture<FlashcardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FlashcardEditorComponent]
+      imports: [FlashcardComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FlashcardEditorComponent);
+    fixture = TestBed.createComponent(FlashcardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
