@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 export class FlashcardComponent {
   // Hier kannst du Daten und Logik definieren
   cards = ['Karte 1', 'Karte 2', 'Karte 3'];
+  adjustHeight(event: Event): void {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto'; // Setze die Höhe zurück
+    textarea.style.height = `${textarea.scrollHeight}px`; // Passe die Höhe an den Inhalt an
+  }
 }
