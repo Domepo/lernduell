@@ -8,9 +8,14 @@
           <h2 class>Karten</h2>
           <ul class="list-group">
             <li class="list-group-item bg-success text-dark text-center mb-2">+</li>
-            <li class="list-group-item text-light mb-2">Karte 1</li>
-            <li class="list-group-item text-light mb-2">Karte 2</li>
-            <li class="list-group-item text-light mb-2">Karte 3</li>
+            <li class="list-group-item text-light mb-2">Quine Mccluskey</li>
+            <li class="list-group-item text-light mb-2">Fourier-Reihen</li>
+            <li class="list-group-item text-light mb-2">Laplace Transformation</li>
+            <li class="list-group-item text-light mb-2">Server Client Modell</li>
+            <li class="list-group-item text-light mb-2">Angular Textboxen</li>
+            <li class="list-group-item text-light mb-2">Partielle Integration</li>
+            <li class="list-group-item text-light mb-2">Primimplikanten</li>
+            <li class="list-group-item text-light mb-2">K-pläne</li>
           </ul>
         </div>
       </div>
@@ -19,25 +24,26 @@
       <!-- Rechter Block -->
     
       <div class="col-md-8">
-        <div class = "rechter-block">
-        <h2 class="text-center">Lernset yx</h2>
-        
-        <div class="form-group mt-4">
-          <label class>Vorderseite</label>
-          <div class="rounded p-3 bg-dark text-light">Vorderseite Inhalt</div>
-        </div>
-  
-        <div class="form-group mt-4">
-          <label class>Rückseite</label>
-          <div class="rounded p-3 bg-dark text-light">Rückseite Inhalt</div>
-        </div>
-  
-        <div class="mt-4 text-center">
-          <button class="btn btn-warning">Speichern</button>
+        <div class="rechter-block">
+          <h2 class="text-center">Lernset yx</h2>
+          
+          <label for="vorderseite" class="custom-label">Vorderseite</label>
+          <textarea
+          id="vorderseite"
+          class="styled-textarea"
+          placeholder="Vorderseite Inhalt"
+          (input)="adjustHeight($event)"></textarea>
+      
+          <label for="rueckseite" class= "custom-label">Rückseite</label>
+          <textarea
+          id="rueckseite"
+          class="styled-textarea"
+          placeholder="Rückseite Inhalt"
+          (input)="adjustHeight($event)"></textarea>
+      
+          <div class="mt-4 text-center button-container">
+            <button>Speichern</button>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  </div>
-
-  
+      
