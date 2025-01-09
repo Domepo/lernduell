@@ -1,8 +1,8 @@
 <div class="container">
     <div class="scoreboard">
       <div class="player-row" *ngFor="let player of players; let i = index">
-        <div class="place">{{ i + 1 | number: '2.0' }}</div>
         <div class="player-name">{{ player.name }}</div>
+        <div class="place">{{ i + 1 | number: '2.0' }}</div>
       </div>
     </div>
   </div>
