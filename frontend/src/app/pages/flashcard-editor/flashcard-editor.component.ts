@@ -60,21 +60,31 @@ export class FlashcardComponent implements OnInit {
     });
 
     this.socketService.listen('cardUpdated').subscribe((res: any) => {
-      const updatedCard = res.updatedCard;
-    
-      // 1) Alle Einträge im Array aktualisieren
-      const index = this.cards.findIndex((c) => c.id === updatedCard.id);
-      if (index !== -1) {
-        this.cards[index] = { ...this.cards[index], ...updatedCard };
+      const updatedCard = res.updatedCard as Flashcard;
+      const idx = this.cards.findIndex((c) => c.id === updatedCard.id);
+      if (idx !== -1) {
+        this.cards[idx] = { ...this.cards[idx], ...updatedCard };
+      } else {
+        this.cards.push(updatedCard);
       }
-    
-      // 2) Falls diese Karte gerade ausgewählt ist, aktualisiere "selectedCard"
+      // falls ausgewählte Karte aktualisiert wird
       if (this.selectedCard && this.selectedCard.id === updatedCard.id) {
         this.selectedCard = { ...this.selectedCard, ...updatedCard };
-        // Durch das Neusetzen von "this.selectedCard" wird das Template neu gerendert,
-        // also auch "card" in *ngIf="selectedCard as card".
       }
     });
+
+    this.socketService.listen('cardDeleted').subscribe((res: any) => {
+      const deletedId = res.deletedId as number;
+      // Lokal aus dem Array entfernen
+      this.cards = this.cards.filter((c) => c.id !== deletedId);
+
+      // Falls die gelöschte Karte gerade ausgewählt war
+      if (this.selectedCard && this.selectedCard.id === deletedId) {
+        this.selectedCard = null;
+      }
+    });
+  
+
   }
   selectCard(card: Flashcard): void {
     // Das ist jetzt die Karte, die in den Textareas editierbar sein soll
@@ -99,5 +109,30 @@ export class FlashcardComponent implements OnInit {
       timestamp: card.timestamp
     });
   }
-
+  createNewCard(): void {
+    this.selectedCard = {
+      id: -1,
+      title: '',
+      front: '',
+      back: '',
+      creator: '',
+      set_name: '',
+      timestamp: ''
+    };
+  }
+  saveCard(card: Flashcard): void {
+    if (card.id === -1) {
+      // Hier fügst du eine völlig neue Karte hinzu
+      // Du könntest ein eigenes Socket-Event 'insertCard' verwenden
+      // oder 'updateCard' so programmieren, dass es automatisch ein Insert macht, wenn id=-1
+      this.socketService.emit('insertCard', card);
+    } else {
+      // Vorhandene Karte aktualisieren
+      this.socketService.emit('updateCard', card);
+    }
+  }
+  deleteCard(card: Flashcard): void {
+    // Schicke ein deleteCard-Event an den Server
+    this.socketService.emit('deleteCard', { id: card.id });
+  }
 }

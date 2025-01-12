@@ -73,6 +73,43 @@ def handle_update_card(data):
     
     # Schicke eine Bestätigung oder die aktualisierten Daten zurück
     emit('cardUpdated', {'status': 'ok', 'updatedCard': data}, broadcast=True)
+    
+@socketio.on('insertCard')
+def handle_insert_card(data):
+    # Erstelle eine neue Flashcard in der DB
+    new_id = db.insert_flashcard(
+        front=data['front'],
+        back=data['back'],
+        title=data['title'],
+        creator=data['creator'],
+        set_name=data['set_name'],
+        timestamp=data['timestamp']
+    )
+
+    # Dann schickst du die neue ID zurück
+    # oder gleich die gesamte neue Karte 
+    new_card = {
+      'id': new_id,
+      'front': data['front'],
+      'back': data['back'],
+      'title': data['title'],
+      'creator': data['creator'],
+      'set_name': data['set_name'],
+      'timestamp': data['timestamp']
+    }
+    emit('cardUpdated', {'status': 'ok', 'updatedCard': new_card}, broadcast=True)
+
+@socketio.on('deleteCard')
+def handle_delete_card(data):
+    # data hat z. B. die Struktur { 'id': 123 }
+    card_id = data['id']
+    print(f"Lösche Karte mit ID {card_id}")
+
+    db.delete_flashcard(card_id)
+
+    # Danach allen Clients mitteilen, dass die Karte gelöscht wurde
+    emit('cardDeleted', {'status': 'ok', 'deletedId': card_id}, broadcast=True)
+
 # Server starten
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', port=port)

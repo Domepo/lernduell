@@ -7,9 +7,9 @@
           <h2>Karten</h2>
           <ul class="list-group">
             <!-- "Plus"-Button bleibt unverändert -->
-            <li class="list-group-item bg-success text-dark text-center mb-2">
-              +
-            </li>
+        <li class="list-group-item bg-success text-dark text-center mb-2" (click)="createNewCard()">
+          +
+        </li>
 
             <!-- Karten-Liste via *ngFor -->
             <div *ngFor="let card of cards">
@@ -28,7 +28,7 @@
 <!-- Rechter Block -->
 <div class="col-md-8" *ngIf="selectedCard as card">
   <div class="rechter-block">
-    <h2 class="text-center">{{ card.title }}</h2>
+    <h2 class="text-center">{{ card.id < 0 ? 'Neue Karte erstellen' : card.title }}</h2>
 
     <label for="titel" class="custom-label">Titel</label>
     <textarea
@@ -57,8 +57,11 @@
       (input)="card.back = $any($event.target).value">
     </textarea>
 
-    <div class="mt-4 text-center button-container">
-      <button (click)="updateCard(card);">Speichern</button>
-    </div>
+        <div class="mt-4 text-center button-container">
+          <button (click)="saveCard(card)">Speichern</button>
+          <button class="btn btn-danger ms-2" (click)="deleteCard(card)">
+            Löschen
+          </button>
+        </div>
   </div>
 </div>

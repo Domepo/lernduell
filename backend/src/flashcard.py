@@ -61,7 +61,7 @@ class FlashcardDB:
     @db_connection
     def delete_flashcard(self, flashcard_id):
         self.cursor.execute("DELETE FROM flashcards WHERE id = ?", (flashcard_id,))
-
+        print(f"Karte mit ID {flashcard_id} gelöscht.")
     def delete_all_flashcards(self):
         os.remove(self.db_name)
 
