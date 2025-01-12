@@ -1,49 +1,59 @@
 <div class="container-fluid p-4 text-light">
-    <div class="row">
-      <!-- Linker Block -->
-      
-        <div class="col-md-4 p-3 rounded">
-          <div class = "Liste rounded ">
-            <div class = "p-3">
-          <h2 class>Karten</h2>
-          <ul class="list-group">
-            <li class="list-group-item bg-success text-dark text-center mb-2">+</li>
-            <li class="list-group-item text-light mb-2">Quine Mccluskey</li>
-            <li class="list-group-item text-light mb-2">Fourier-Reihen</li>
-            <li class="list-group-item text-light mb-2">Laplace Transformation</li>
-            <li class="list-group-item text-light mb-2">Server Client Modell</li>
-            <li class="list-group-item text-light mb-2">Angular Textboxen</li>
-            <li class="list-group-item text-light mb-2">Partielle Integration</li>
-            <li class="list-group-item text-light mb-2">Primimplikanten</li>
-            <li class="list-group-item text-light mb-2">K-pläne</li>
-          </ul>
-        </div>
-      </div>
-      </div>
-  
-      <!-- Rechter Block -->
-    
-      <div class="col-md-8">
-        <div class="rechter-block">
-          <h2 class="text-center">Lernset yx</h2>
-          
-          <label for="vorderseite" class="custom-label">Vorderseite</label>
-          <textarea
-          id="vorderseite"
-          class="styled-textarea"
-          placeholder="Vorderseite Inhalt"
-          (input)="adjustHeight($event)"></textarea>
-      
-          <label for="rueckseite" class= "custom-label">Rückseite</label>
-          <textarea
-          id="rueckseite"
-          class="styled-textarea"
-          placeholder="Rückseite Inhalt"
-          (input)="adjustHeight($event)"></textarea>
-      
-          <div class="mt-4 text-center button-container">
-            <button>Speichern</button>
-          </div>
-        </div>
-      </div>
-      
+  <h2>Alle Flashcards</h2>
+  <div class="card p-3 mb-3" *ngFor="let card of cards">
+    <div class="mb-2">
+      <label>Titel:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="card.title" 
+        class="form-control" />
+    </div>
+
+    <div class="mb-2">
+      <label>Vorderseite (front):</label>
+      <textarea 
+        [(ngModel)]="card.front" 
+        class="form-control"
+        (input)="adjustHeight($event)">
+      </textarea>
+    </div>
+
+    <div class="mb-2">
+      <label>Rückseite (back):</label>
+      <textarea 
+        [(ngModel)]="card.back" 
+        class="form-control" 
+        (input)="adjustHeight($event)">
+      </textarea>
+    </div>
+
+    <div class="mb-2">
+      <label>Erstellt von (creator):</label>
+      <input
+        type="text"
+        [(ngModel)]="card.creator"
+        class="form-control" />
+    </div>
+
+    <div class="mb-2">
+      <label>Set-Name (set_name):</label>
+      <input
+        type="text"
+        [(ngModel)]="card.set_name"
+        class="form-control" />
+    </div>
+
+    <div class="mb-2">
+      <label>Timestamp:</label>
+      <input
+        type="text"
+        [(ngModel)]="card.timestamp"
+        class="form-control" />
+    </div>
+
+    <!-- Speichern-Button ruft updateCard(card) auf -->
+    <button class="btn btn-primary" (click)="updateCard(card)">
+      Speichern
+    </button>
+  </div>
+</div>

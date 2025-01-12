@@ -20,4 +20,7 @@ export class SocketService {
       })
     })
   }
+  emit(eventName: string, data: any): void {
+    this.socket.emit(eventName, data);
+  }
 }

@@ -15,14 +15,15 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit {
 
   title= "test";
-  currentTime = ''; // Property für die Uhrzeit
+  flashcard = ''; // Property für die Uhrzeit
 
 
   constructor(private socketService: SocketService) {}
 
   ngOnInit() {
-    this.socketService.listen('time').subscribe((data: any) => {
-      this.currentTime = data.time;
+    this.socketService.listen('card').subscribe((data: any) => {
+      this.flashcard = data.card;
+      console.log(this.flashcard);
     });
   }
 }
