@@ -24,10 +24,17 @@ interface Flashcard {
 })
 export class FlashcardComponent implements OnInit {
   cards: Flashcard[] = [];
+  selectedCard: Flashcard | null = null;
+  selectedCardId: any;
 
   constructor(private socketService: SocketService) {}
 
+  
+
   ngOnInit() {
+    // frage nach den aktuellen Karten, wenn auf die Seite gegangen wird
+    this.socketService.emit('getCards', {});
+
     this.socketService.listen('card').subscribe((data: any) => {
       const newCard: Flashcard = {
         id: data.card[0],
@@ -48,15 +55,39 @@ export class FlashcardComponent implements OnInit {
         // Ansonsten bestehende Karte aktualisieren
         this.cards[existingCardIndex] = newCard;
       }
+
+
     });
 
     this.socketService.listen('cardUpdated').subscribe((res: any) => {
-      console.log('Update-Response:', res);
+      const updatedCard = res.updatedCard;
+    
+      // 1) Alle Einträge im Array aktualisieren
+      const index = this.cards.findIndex((c) => c.id === updatedCard.id);
+      if (index !== -1) {
+        this.cards[index] = { ...this.cards[index], ...updatedCard };
+      }
+    
+      // 2) Falls diese Karte gerade ausgewählt ist, aktualisiere "selectedCard"
+      if (this.selectedCard && this.selectedCard.id === updatedCard.id) {
+        this.selectedCard = { ...this.selectedCard, ...updatedCard };
+        // Durch das Neusetzen von "this.selectedCard" wird das Template neu gerendert,
+        // also auch "card" in *ngIf="selectedCard as card".
+      }
     });
   }
-  updateArray(){
-
+  selectCard(card: Flashcard): void {
+    // Das ist jetzt die Karte, die in den Textareas editierbar sein soll
+    this.selectedCard = card; 
+    this.selectedCardId = card.id;
+    console.log(card);
+    // Wichtig: ggf. eine Kopie erstellen, falls du nicht sofort das Original überschreiben willst
   }
+  updateSelectedCard(card: Flashcard){
+    const test = this.cards.findIndex(card => card.id === this.selectedCardId)
+    this.selectedCard = this.cards[test];
+  }
+
   updateCard(card: Flashcard) {
     this.socketService.emit('updateCard', {
       id: card.id,
@@ -68,9 +99,5 @@ export class FlashcardComponent implements OnInit {
       timestamp: card.timestamp
     });
   }
-  adjustHeight(event: Event): void {
-    const textarea = event.target as HTMLTextAreaElement;
-    textarea.style.height = 'auto';
-    textarea.style.height = `${textarea.scrollHeight}px`;
-  }
+
 }

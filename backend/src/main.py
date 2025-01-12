@@ -27,7 +27,11 @@ def send_flashcards():
 def send_flashcards_loop():
     while True:
         send_flashcards()
-        time.sleep(30)  # 1 Sekunde warten
+        time.sleep(30)  
+
+@socketio.on('getCards')
+def handle_get_cards(_data=None):
+    send_flashcards()
 
 @socketio.on('connect')
 def handle_connect():
@@ -69,7 +73,6 @@ def handle_update_card(data):
     
     # Schicke eine Bestätigung oder die aktualisierten Daten zurück
     emit('cardUpdated', {'status': 'ok', 'updatedCard': data}, broadcast=True)
-    send_flashcards()
 # Server starten
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', port=port)

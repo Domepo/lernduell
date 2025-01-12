@@ -1,59 +1,64 @@
 <div class="container-fluid p-4 text-light">
-  <h2>Alle Flashcards</h2>
-  <div class="card p-3 mb-3" *ngFor="let card of cards">
-    <div class="mb-2">
-      <label>Titel:</label>
-      <input 
-        type="text" 
-        [(ngModel)]="card.title" 
-        class="form-control" />
-    </div>
+  <div class="row">
+    <!-- Linker Block -->
+    <div class="col-md-4 p-3 rounded">
+      <div class="Liste rounded">
+        <div class="p-3">
+          <h2>Karten</h2>
+          <ul class="list-group">
+            <!-- "Plus"-Button bleibt unverändert -->
+            <li class="list-group-item bg-success text-dark text-center mb-2">
+              +
+            </li>
 
-    <div class="mb-2">
-      <label>Vorderseite (front):</label>
-      <textarea 
-        [(ngModel)]="card.front" 
-        class="form-control"
-        (input)="adjustHeight($event)">
-      </textarea>
+            <!-- Karten-Liste via *ngFor -->
+            <div *ngFor="let card of cards">
+              <!-- Beim Klick auf den Titel -> selectCard(card) -->
+              <li 
+                class="list-group-item text-light mb-2" 
+                (click)="selectCard(card)"
+              >
+                {{ card.title }}
+              </li>
+            </div>
+          </ul>
+        </div>
+      </div>
     </div>
+<!-- Rechter Block -->
+<div class="col-md-8" *ngIf="selectedCard as card">
+  <div class="rechter-block">
+    <h2 class="text-center">{{ card.title }}</h2>
 
-    <div class="mb-2">
-      <label>Rückseite (back):</label>
-      <textarea 
-        [(ngModel)]="card.back" 
-        class="form-control" 
-        (input)="adjustHeight($event)">
-      </textarea>
+    <label for="titel" class="custom-label">Titel</label>
+    <textarea
+      id="titel"
+      class="styled-textarea"
+      placeholder="Titel eingeben"
+      [value]="card.title"
+      (input)="card.title = $any($event.target).value">
+    </textarea>
+
+    <label for="vorderseite" class="custom-label">Vorderseite</label>
+    <textarea
+      id="vorderseite"
+      class="styled-textarea"
+      placeholder="Vorderseite Inhalt"
+      [value]="card.front"
+      (input)="card.front = $any($event.target).value">
+    </textarea>
+
+    <label for="rueckseite" class="custom-label">Rückseite</label>
+    <textarea
+      id="rueckseite"
+      class="styled-textarea"
+      placeholder="Rückseite Inhalt"
+      [value]="card.back"
+      (input)="card.back = $any($event.target).value">
+    </textarea>
+
+    <div class="mt-4 text-center button-container">
+      <button (click)="updateCard(card);">Speichern</button>
     </div>
-
-    <div class="mb-2">
-      <label>Erstellt von (creator):</label>
-      <input
-        type="text"
-        [(ngModel)]="card.creator"
-        class="form-control" />
-    </div>
-
-    <div class="mb-2">
-      <label>Set-Name (set_name):</label>
-      <input
-        type="text"
-        [(ngModel)]="card.set_name"
-        class="form-control" />
-    </div>
-
-    <div class="mb-2">
-      <label>Timestamp:</label>
-      <input
-        type="text"
-        [(ngModel)]="card.timestamp"
-        class="form-control" />
-    </div>
-
-    <!-- Speichern-Button ruft updateCard(card) auf -->
-    <button class="btn btn-primary" (click)="updateCard(card)">
-      Speichern
-    </button>
   </div>
 </div>
