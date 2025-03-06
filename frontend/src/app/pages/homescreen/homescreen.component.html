@@ -1,22 +1,53 @@
 <div class="game-background">
-    <div class="container text-center">
-        <!-- Titel -->
-        <h1 class="mb-5 p-3" style="color: white;">Hauptmenü</h1>
+  <div class="container text-center">
+      <!-- Titel -->
+      <h1 class="mb-5 p-3" style="color: white;">Hauptmenü</h1>
 
-        <!-- Obere Kartenreihe -->
-
-        <div class="container mt-5 ">
-            <div class="row justify-content-center mb-3">
+      <!-- Obere Kartenreihe -->
+      <div class="container mt-5">
+          <div class="row justify-content-center mb-3">
               <div class="col-4 text-center">
-                <button class="btn card-button w-100" (click)="navigateTo('/game-homescreen')">Spielen</button>
+                  <div class="button-container">
+                      <button class="btn" (click)="navigateTo('/game-homescreen')">Spielen</button>
+                  </div>
               </div>
               <div class="col-4 text-center">
-                <button class="btn card-button w-100 "(click)="navigateTo('/flashcard')">Karteikarten editieren</button>
+                  <div class="button-container">
+                      <button class="btn" (click)="navigateTo('/flashcard')">Karteikarten editieren</button>
+                  </div>
               </div>
-            </div>
           </div>
-          <div style="margin-top: 100px;">
-            <app-scoreboard></app-scoreboard>
+      </div>
 
+      <!-- Textfelder für Name und SessionID -->
+      <div class="container mt-5">
+          <div class="row justify-content-center">
+              <div class="col-4">
+                  <div class="form-group">
+                      <label for="username" style="color: white;">Name</label>
+                      <input type="text" id="username" class="form-control" placeholder="Gib deinen Namen ein" />
+                  </div>
+              </div>
+              <div class="col-4">
+                  <div class="form-group">
+                      <label for="sessionid" style="color: white;">SessionID</label>
+                      <input type="text" id="sessionid" class="form-control" placeholder="Gib deine SessionID ein" />
+                  </div>
+              </div>
           </div>
-    </div>
+
+          <!-- Anmelden Button -->
+          <div class="row justify-content-center mt-4">
+              <div class="col-4 text-center">
+                  <div class="button-container">
+                      <button class="btn">Anmelden</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div style="margin-top: 100px;">
+          <app-scoreboard></app-scoreboard>
+      </div>
+  </div>
+</div>

@@ -90,6 +90,12 @@
   .styled-textarea::placeholder {
     color: #bfbfbf; /* Platzhalterfarbe */
   }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Abstand zwischen den Buttons */
+  }
+  
   .button-container button {
     background-color: #ffc107; /* Gelb/Orange */
     color: #000000; /* Schwarzer Text */
@@ -112,3 +118,4 @@
     background-color: #ff8f00; /* Noch dunkler bei Klick */
     transform: scale(0.95); /* Leichtes Schrumpfen beim Klicken */
   }
+  
