@@ -1,22 +1,26 @@
 <div class="game-background">
-    <div class="container text-center">
-        <!-- Titel -->
-        <h1 class="mb-5 p-3" style="color: white;">Hauptmenü</h1>
+  <div class="container text-center">
+      <!-- Titel -->
+      <h1 class="mb-5 p-3" style="color: white;">Hauptmenü</h1>
 
-        <!-- Obere Kartenreihe -->
-
-        <div class="container mt-5 ">
-            <div class="row justify-content-center mb-3">
+      <!-- Obere Kartenreihe -->
+      <div class="container mt-5">
+          <div class="row justify-content-center mb-3">
               <div class="col-4 text-center">
-                <button class="btn card-button w-100" (click)="navigateTo('/game-homescreen')">Spielen</button>
+                  <div class="button-container">
+                      <button class="btn" (click)="navigateTo('/game-homescreen')">Spielen</button>
+                  </div>
               </div>
               <div class="col-4 text-center">
-                <button class="btn card-button w-100 "(click)="navigateTo('/flashcard')">Karteikarten editieren</button>
+                  <div class="button-container">
+                      <button class="btn" (click)="navigateTo('/flashcard')">Karteikarten editieren</button>
+                  </div>
               </div>
-            </div>
           </div>
-          <div style="margin-top: 100px;">
-            <app-scoreboard></app-scoreboard>
-
-          </div>
-    </div>
+      </div>
+      
+      <div style="margin-top: 100px;">
+          <app-scoreboard></app-scoreboard>
+      </div>
+  </div>
+</div>
