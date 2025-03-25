@@ -10,14 +10,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ScoreboardComponent {
   players = [
-    { name: 'Dominik' },
-    { name: 'Sui' },
-    { name: 'Raul' },
-    { name: 'Jens' },
+    { name: 'Dominik Teichröb' },
+    { name: 'Sujan Sirimorhan' },
+    { name: 'Raul Kirsch' },
+    { name: 'Jens Müller' },
     { name: 'Rainer Rasche' },
-    { name: 'LÖKJASND' },
-    { name: 'DOCKER' },
-    { name: 'NICKMERCS' }
+    { name: 'Bernd Zehner' },
+    { name: 'Julian Nagelsmann' },
+    { name: 'Uwe Schüler' }
   ];
 
   addPlayer(playerName: string) {
