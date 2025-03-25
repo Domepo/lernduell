@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
-import time
 from flashcard import FlashcardDB
+
+import time
 
 app = Flask(__name__)
 db = FlashcardDB("backend/database/flashcards.db")
@@ -76,27 +77,23 @@ def handle_update_card(data):
     
 @socketio.on('insertCard')
 def handle_insert_card(data):
-    # Erstelle eine neue Flashcard in der DB
     new_id = db.insert_flashcard(
         front=data['front'],
         back=data['back'],
         title=data['title'],
-        creator=data['creator'],
-        set_name=data['set_name'],
-        timestamp=data['timestamp']
+        UID=data['UID'],
+        LID=data['LID']
     )
 
-    # Dann schickst du die neue ID zurück
-    # oder gleich die gesamte neue Karte 
     new_card = {
-      'id': new_id,
-      'front': data['front'],
-      'back': data['back'],
-      'title': data['title'],
-      'creator': data['creator'],
-      'set_name': data['set_name'],
-      'timestamp': data['timestamp']
+        'id': new_id,
+        'front': data['front'],
+        'back': data['back'],
+        'title': data['title'],
+        'UID': data['UID'],
+        'LID': data['LID']
     }
+
     emit('cardUpdated', {'status': 'ok', 'updatedCard': new_card}, broadcast=True)
 
 @socketio.on('deleteCard')

@@ -31,43 +31,35 @@ class FlashcardDB:
         return wrapper
 
     @db_connection
-    def delete_table(self):
-        self.cursor.execute('''
-        DROP TABLE IF EXISTS flashcards;
-        )
-        ''')
-        print("Tabelle 'user' erstellt (falls nicht vorhanden).")
-
-    @db_connection
-    def create_table(self):
+    def create_user_table(self):
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS user (
-            UID TEXT PRIMARY KEY AUTOINCREMENT,
+            UID INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL
         )
         ''')
         print("Tabelle 'user' erstellt (falls nicht vorhanden).")
 
     @db_connection
-    def create_table(self):
+    def create_session_table(self):
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS session (
-            SID TEXT PRIMARY KEY AUTOINCREMENT,
+            SID INTEGER PRIMARY KEY AUTOINCREMENT,
             sessionname TEXT NOT NULL
         )
         ''')
         print("Tabelle 'session' erstellt (falls nicht vorhanden).")
 
     @db_connection
-    def create_table(self):
+    def create_flashcards_table(self):
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS karteikarten (
-            KID TEXT PRIMARY KEY AUTOINCREMENT,
+            KID INTEGER PRIMARY KEY AUTOINCREMENT,
             front TEXT NOT NULL,
-            bront TEXT NOT NULL,
+            back TEXT NOT NULL,
             title TEXT NOT NULL,
-            UID TEXT NOT NULL,
-            LID TEXT TEXT NOT NULL,
+            UID INTEGER NOT NULL,
+            LID INTEGER TEXT NOT NULL,
             FOREIGN KEY (UID) REFERENCES user(UID) ON DELETE CASCADE,
             FOREIGN KEY (LID) REFERENCES lernset(LID) ON DELETE CASCADE
         )
@@ -75,12 +67,12 @@ class FlashcardDB:
         print("Tabelle 'karteikarten' erstellt (falls nicht vorhanden).")
 
     @db_connection
-    def create_table(self):
+    def create_scoreboard_table(self):
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS scoreboard (
-            SBID TEXT PRIMARY KEY AUTOINCREMENT,
-            SID TEXT NOT NULL,
-            UID TEXT NOT NULL,
+            SBID INTEGER PRIMARY KEY AUTOINCREMENT,
+            SID INTEGER NOT NULL,
+            UID INTEGER NOT NULL,
             punkte INTEGER NOT NULL,
             FOREIGN KEY (SID) REFERENCES session(SID) ON DELETE CASCADE,
             FOREIGN KEY (UID) REFERENCES user(UID) ON DELETE CASCADE
@@ -89,12 +81,12 @@ class FlashcardDB:
         print("Tabelle 'scoreboard' erstellt (falls nicht vorhanden).")
 
     @db_connection
-    def create_table(self):
+    def create_lernset_table(self):
         self.cursor.execute('''
         CREATE TABLE IF NOT EXISTS lernset (
-            LID TEXT PRIMARY KEY AUTOINCREMENT,
-            SID TEXT TEXT NOT NULL,
-            UID TEXT TEXT NOT NULL,
+            LID INTEGER PRIMARY KEY AUTOINCREMENT,
+            SID INTEGER TEXT NOT NULL,
+            UID INTEGER TEXT NOT NULL,
             name TEXT NOT NULL,
             FOREIGN KEY (SID) REFERENCES session(SID) ON DELETE CASCADE,
             FOREIGN KEY (UID) REFERENCES user(UID) ON DELETE CASCADE
@@ -103,12 +95,12 @@ class FlashcardDB:
         print("Tabelle 'scoreboard' erstellt (falls nicht vorhanden).")
 
     @db_connection
-    def insert_flashcard(self, front, back, title, creator, LID):
+    def insert_flashcard(self, front, back, title, UID, LID):
         self.cursor.execute('''
-        INSERT INTO karteikarten (front, back, title, creator, UID, LID)
-        VALUES (?, ?, ?, ?, ?, ?)
-        ''', (front, back, title, creator, LID))
-        print("Neue Flashcard eingefügt.")
+        INSERT INTO karteikarten (front, back, title, UID, LID)
+        VALUES (?, ?, ?, ?, ?)
+        ''', (front, back, title, UID, LID))
+        return self.cursor.lastrowid  # Gibt die ID der neuen Flashcard zurück
 
     @db_connection
     def get_all_flashcards(self):
@@ -135,3 +127,20 @@ class FlashcardDB:
             WHERE id = ?
         ''', (front, back, title, UID, LID, KID))
         print(f"Flashcard mit ID {KID} aktualisiert.")
+
+
+if __name__ == "__main__":
+    # Stelle sicher, dass der Ordner existiert
+    os.makedirs("database", exist_ok=True)
+
+    # DB-Instanz erzeugen
+    db = FlashcardDB("database/flashcards.db")
+
+    # Tabellen anlegen
+    db.create_user_table()
+    db.create_session_table()
+    db.create_flashcards_table()
+    db.create_scoreboard_table()
+    db.create_lernset_table()
+
+    print("Datenbank und Tabellen wurden erfolgreich erstellt.")

@@ -125,7 +125,13 @@ export class FlashcardComponent implements OnInit {
       // Hier fügst du eine völlig neue Karte hinzu
       // Du könntest ein eigenes Socket-Event 'insertCard' verwenden
       // oder 'updateCard' so programmieren, dass es automatisch ein Insert macht, wenn id=-1
-      this.socketService.emit('insertCard', card);
+      this.socketService.emit('insertCard', {
+        front: card.front,
+        back: card.back,
+        title: card.title,
+        UID: 1,     // oder dynamisch vom eingeloggten User
+        LID: 1      // Lernset-ID, ggf. später dynamisch
+      });
     } else {
       // Vorhandene Karte aktualisieren
       this.socketService.emit('updateCard', card);
