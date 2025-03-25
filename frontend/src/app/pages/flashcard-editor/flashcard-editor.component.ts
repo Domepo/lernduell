@@ -77,7 +77,6 @@ export class FlashcardComponent implements OnInit {
       const deletedId = res.deletedId as number;
       // Lokal aus dem Array entfernen
       this.cards = this.cards.filter((c) => c.id !== deletedId);
-
       // Falls die gelöschte Karte gerade ausgewählt war
       if (this.selectedCard && this.selectedCard.id === deletedId) {
         this.selectedCard = null;
@@ -90,9 +89,8 @@ export class FlashcardComponent implements OnInit {
     // Das ist jetzt die Karte, die in den Textareas editierbar sein soll
     this.selectedCard = card; 
     this.selectedCardId = card.id;
-    console.log(card);
-    // Wichtig: ggf. eine Kopie erstellen, falls du nicht sofort das Original überschreiben willst
   }
+
   updateSelectedCard(card: Flashcard){
     const test = this.cards.findIndex(card => card.id === this.selectedCardId)
     this.selectedCard = this.cards[test];
@@ -126,6 +124,8 @@ export class FlashcardComponent implements OnInit {
       // Du könntest ein eigenes Socket-Event 'insertCard' verwenden
       // oder 'updateCard' so programmieren, dass es automatisch ein Insert macht, wenn id=-1
       this.socketService.emit('insertCard', card);
+      this.selectedCard = null;
+      this.ngOnInit();
     } else {
       // Vorhandene Karte aktualisieren
       this.socketService.emit('updateCard', card);
