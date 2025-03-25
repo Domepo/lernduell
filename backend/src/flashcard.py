@@ -31,51 +31,107 @@ class FlashcardDB:
         return wrapper
 
     @db_connection
-    def create_table(self):
+    def delete_table(self):
         self.cursor.execute('''
-        CREATE TABLE IF NOT EXISTS flashcards (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            front TEXT NOT NULL,
-            back TEXT NOT NULL,
-            title TEXT NOT NULL,
-            creator TEXT NOT NULL,
-            set_name TEXT NOT NULL,
-            timestamp TEXT NOT NULL
+        DROP TABLE IF EXISTS flashcards;
         )
         ''')
-        print("Tabelle 'flashcards' erstellt (falls nicht vorhanden).")
+        print("Tabelle 'user' erstellt (falls nicht vorhanden).")
 
     @db_connection
-    def insert_flashcard(self, front, back, title, creator, set_name, timestamp):
+    def create_table(self):
         self.cursor.execute('''
-        INSERT INTO flashcards (front, back, title, creator, set_name, timestamp)
+        CREATE TABLE IF NOT EXISTS user (
+            UID TEXT PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL
+        )
+        ''')
+        print("Tabelle 'user' erstellt (falls nicht vorhanden).")
+
+    @db_connection
+    def create_table(self):
+        self.cursor.execute('''
+        CREATE TABLE IF NOT EXISTS session (
+            SID TEXT PRIMARY KEY AUTOINCREMENT,
+            sessionname TEXT NOT NULL
+        )
+        ''')
+        print("Tabelle 'session' erstellt (falls nicht vorhanden).")
+
+    @db_connection
+    def create_table(self):
+        self.cursor.execute('''
+        CREATE TABLE IF NOT EXISTS karteikarten (
+            KID TEXT PRIMARY KEY AUTOINCREMENT,
+            front TEXT NOT NULL,
+            bront TEXT NOT NULL,
+            title TEXT NOT NULL,
+            UID TEXT NOT NULL,
+            LID TEXT TEXT NOT NULL,
+            FOREIGN KEY (UID) REFERENCES user(UID) ON DELETE CASCADE,
+            FOREIGN KEY (LID) REFERENCES lernset(LID) ON DELETE CASCADE
+        )
+        ''')
+        print("Tabelle 'karteikarten' erstellt (falls nicht vorhanden).")
+
+    @db_connection
+    def create_table(self):
+        self.cursor.execute('''
+        CREATE TABLE IF NOT EXISTS scoreboard (
+            SBID TEXT PRIMARY KEY AUTOINCREMENT,
+            SID TEXT NOT NULL,
+            UID TEXT NOT NULL,
+            punkte INTEGER NOT NULL,
+            FOREIGN KEY (SID) REFERENCES session(SID) ON DELETE CASCADE,
+            FOREIGN KEY (UID) REFERENCES user(UID) ON DELETE CASCADE
+        )
+        ''')
+        print("Tabelle 'scoreboard' erstellt (falls nicht vorhanden).")
+
+    @db_connection
+    def create_table(self):
+        self.cursor.execute('''
+        CREATE TABLE IF NOT EXISTS lernset (
+            LID TEXT PRIMARY KEY AUTOINCREMENT,
+            SID TEXT TEXT NOT NULL,
+            UID TEXT TEXT NOT NULL,
+            name TEXT NOT NULL,
+            FOREIGN KEY (SID) REFERENCES session(SID) ON DELETE CASCADE,
+            FOREIGN KEY (UID) REFERENCES user(UID) ON DELETE CASCADE
+        )
+        ''')
+        print("Tabelle 'scoreboard' erstellt (falls nicht vorhanden).")
+
+    @db_connection
+    def insert_flashcard(self, front, back, title, creator, LID):
+        self.cursor.execute('''
+        INSERT INTO karteikarten (front, back, title, creator, UID, LID)
         VALUES (?, ?, ?, ?, ?, ?)
-        ''', (front, back, title, creator, set_name, timestamp))
+        ''', (front, back, title, creator, LID))
         print("Neue Flashcard eingefügt.")
 
     @db_connection
     def get_all_flashcards(self):
-        self.cursor.execute("SELECT * FROM flashcards")
+        self.cursor.execute("SELECT * FROM karteikarten")
         return self.cursor.fetchall()
 
     @db_connection
-    def delete_flashcard(self, flashcard_id):
-        self.cursor.execute("DELETE FROM flashcards WHERE id = ?", (flashcard_id,))
-        print(f"Karte mit ID {flashcard_id} gelöscht.")
+    def delete_flashcard(self, KID):
+        self.cursor.execute("DELETE FROM karteikarten WHERE id = ?", (KID,))
+        print(f"Karte mit ID {KID} gelöscht.")
     def delete_all_flashcards(self):
         os.remove(self.db_name)
 
     # NEU: Methode zum Aktualisieren einer Flashcard
     @db_connection
-    def update_flashcard(self, card_id, front, back, title, creator, set_name, timestamp):
+    def update_flashcard(self, KID, front, back, title, UID, LID):
         self.cursor.execute('''
             UPDATE flashcards
             SET front = ?,
                 back = ?,
                 title = ?,
-                creator = ?,
-                set_name = ?,
-                timestamp = ?
+                UID = ?,    
+                LID = ?,
             WHERE id = ?
-        ''', (front, back, title, creator, set_name, timestamp, card_id))
-        print(f"Flashcard mit ID {card_id} aktualisiert.")
+        ''', (front, back, title, UID, LID, KID))
+        print(f"Flashcard mit ID {KID} aktualisiert.")
