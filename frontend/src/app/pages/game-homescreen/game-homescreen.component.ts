@@ -19,14 +19,14 @@ export class GameHomescreenComponent implements OnInit {
 
   ngOnInit() {
     this.socketService.getFlashcards().subscribe((data: any) => {
-      if (data && data.card) {
-        const card = data.card;
-        if (!this.flashcards.find((c: any) => c[0] === card[0])) {
-          this.flashcards.push(card); // card ist ein Array: [id, front, back, ...]
-        }
+      const card = data.card;
+      if (card && !this.flashcards.find((c) => c[0] === card[0])) {
+        this.flashcards.push(card);
+        this.totalCards = this.flashcards.length;
       }
     });
   }
+  
 
   get currentCard() {
     return this.flashcards[this.currentCardIndex];
@@ -44,4 +44,10 @@ export class GameHomescreenComponent implements OnInit {
       this.currentCardIndex = 0; // oder Spiel beenden?
     }
   }
+  totalCards = 0;
+
+get remainingCards(): number {
+  return this.totalCards - this.currentCardIndex;
+}
+
 }
