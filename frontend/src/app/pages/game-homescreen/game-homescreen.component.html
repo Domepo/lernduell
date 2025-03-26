@@ -3,6 +3,24 @@
     <h1 style="color: white;">Spiel</h1>
 
     <div class="row mt-4">
+      <!--Progress Bar-->
+      <div class="progress-container mb-3">
+        <div class="progress" [attr.title]="progressTooltip">
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar"
+            [ngClass]="progressClass"
+            [style.width.%]="progressPercent"
+          >
+            <span class="progress-text">
+              {{ currentCardIndex }} von {{ totalCards }} gelernt ({{ progressPercent }}%)
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      
+
       <!-- Linke Spalte -->
       <div class="col-md-3">
         <div class="component-background-p1">
@@ -13,6 +31,7 @@
           </div>
         </div>
       </div>
+
 
       <!-- Mittlere Spalte -->
       <div class="col-md-6">
@@ -61,3 +80,16 @@
     </div>
   </div>
 </div>
+
+<!-- Fertig-Overlay -->
+<div
+  *ngIf="isFinished"
+  class="overlay-done d-flex flex-column justify-content-center align-items-center"
+  (click)="restartSet()"
+>
+  <div class="overlay-box text-center p-4">
+    <h2 class="mb-3">🎉 Lernset abgeschlossen!</h2>
+    <p>Klicke hier, um von vorn zu starten.</p>
+  </div>
+</div>
+

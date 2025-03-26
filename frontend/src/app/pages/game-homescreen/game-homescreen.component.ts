@@ -37,17 +37,48 @@ export class GameHomescreenComponent implements OnInit {
   }
 
   nextCard() {
+    if (this.currentCardIndex >= this.flashcards.length - 1) {
+      if (this.currentCardIndex >= this.flashcards.length - 1) {
+        this.currentCardIndex++;  // ← ZÄHLEN!
+        this.isFinished = true;
+        return;
+      }
+      this.currentCardIndex++;
+      this.showFront = true;
+      
+    }
+  
     this.currentCardIndex++;
     this.showFront = true;
-
-    if (this.currentCardIndex >= this.flashcards.length) {
-      this.currentCardIndex = 0; // oder Spiel beenden?
-    }
   }
+  isFinished = false;
   totalCards = 0;
+
+  restartSet() {
+    this.currentCardIndex = 0;
+    this.showFront = true;
+    this.isFinished = false;
+  }
+  
 
 get remainingCards(): number {
   return this.totalCards - this.currentCardIndex;
 }
+get progressPercent(): number {
+  if (this.totalCards === 0) return 0;
+  if (this.isFinished) return 100;
+  return Math.floor((this.currentCardIndex / this.totalCards) * 100);
+}
 
+get progressClass(): string {
+  if (this.isFinished) return 'bg-success';
+  const percent = this.progressPercent;
+  if (percent >= 80) return 'bg-success';
+  if (percent >= 50) return 'bg-warning';
+  return 'bg-danger';
+}
+
+get progressTooltip(): string {
+  return `${this.currentCardIndex} von ${this.totalCards} Karteikarten gelernt`;
+}
 }
