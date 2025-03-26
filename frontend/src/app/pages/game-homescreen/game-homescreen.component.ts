@@ -43,6 +43,13 @@ export class GameHomescreenComponent implements OnInit {
 
     if (this.currentCardIndex >= this.flashcards.length) {
       Swal.fire({
+        showClass: {
+          popup: 'swal-show'
+        },
+        hideClass: {
+          popup: 'swal-hide'
+        },
+                
         title: 'Super!',
         text: 'Du hast alle Karteikarten geschafft!',
         icon: 'success',
@@ -54,7 +61,7 @@ export class GameHomescreenComponent implements OnInit {
         iconColor: '#FCBF49',
         // Farbe des Bestätigungs-Buttons
         confirmButtonColor: '#FCBF49',
-        confirmButtonText: 'Cool',
+        confirmButtonText: '<span style="color: black; font-weight: bold;">Cool</span>',
         customClass: {
           popup: 'swal-custom-popup'
         }
@@ -63,6 +70,28 @@ export class GameHomescreenComponent implements OnInit {
         this.currentCardIndex = 0;
       });
     }
+    const style = document.createElement('style');
+style.innerHTML = `
+  .swal-show {
+    animation: swalFadeIn 0.4s ease forwards;
+  }
+
+  .swal-hide {
+    animation: swalFadeOut 0.3s ease forwards;
+  }
+
+  @keyframes swalFadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes swalFadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.8); }
+  }
+`;
+document.head.appendChild(style);
+
   }
 
   get remainingCards(): number {

@@ -71,3 +71,24 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   min-height: 300px;
 }
+const style = document.createElement('style');
+style.innerHTML = `
+  .swal-show {
+    animation: swalFadeIn 1s ease forwards;
+  }
+
+  .swal-hide {
+    animation: swalFadeOut 1s ease forwards;
+  }
+
+  @keyframes swalFadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes swalFadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.8); }
+  }
+`;
+document.head.appendChild(style);
