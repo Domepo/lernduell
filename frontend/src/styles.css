@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+.swal-custom-popup {
+    border-radius: 35px !important; /* Passt die Rundung an */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Schatteneffekt */
+
+  }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 import { SocketService } from '../../socket.service';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { CommonModule } from '@angular/common';
@@ -14,6 +15,7 @@ export class GameHomescreenComponent implements OnInit {
   flashcards: any[] = [];
   currentCardIndex = 0;
   showFront = true;
+  totalCards = 0;
 
   constructor(private socketService: SocketService) {}
 
@@ -26,7 +28,6 @@ export class GameHomescreenComponent implements OnInit {
       }
     });
   }
-  
 
   get currentCard() {
     return this.flashcards[this.currentCardIndex];
@@ -41,13 +42,30 @@ export class GameHomescreenComponent implements OnInit {
     this.showFront = true;
 
     if (this.currentCardIndex >= this.flashcards.length) {
-      this.currentCardIndex = 0; // oder Spiel beenden?
+      Swal.fire({
+        title: 'Super!',
+        text: 'Du hast alle Karteikarten geschafft!',
+        icon: 'success',
+        // Hintergrundfarbe des Pop-ups
+        background: '#2e4a7f',
+        // Textfarbe im Pop-up
+        color: '#FFFFFF',
+        // Farbe des Icons (z. B. für den "success"-Haken)
+        iconColor: '#FCBF49',
+        // Farbe des Bestätigungs-Buttons
+        confirmButtonColor: '#FCBF49',
+        confirmButtonText: 'Cool',
+        customClass: {
+          popup: 'swal-custom-popup'
+        }
+      }).then(() => {
+        // Hier kannst du das Spiel zurücksetzen oder andere Aktionen ausführen
+        this.currentCardIndex = 0;
+      });
     }
   }
-  totalCards = 0;
 
-get remainingCards(): number {
-  return this.totalCards - this.currentCardIndex;
-}
-
+  get remainingCards(): number {
+    return this.totalCards - this.currentCardIndex;
+  }
 }
