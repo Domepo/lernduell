@@ -5,8 +5,10 @@
       <!-- Logo -->
       <a class="navbar-brand" href="#">Lernduell</a>
 
-      <div class="user-info ms-auto" *ngIf="auth.isLoggedIn()">
-        Name: {{ auth.name }} | Session: {{ auth.session }}
+      <div class="user-info">
+        <span><span class="label">Name: </span> <span class="value">{{ auth.name }}</span></span>
+        <span class="divider">|</span>
+        <span><span class="label">SessionID: </span> <span class="value">{{ auth.session }}</span></span>
       </div>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 

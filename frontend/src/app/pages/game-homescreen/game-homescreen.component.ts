@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../../socket.service';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-game-homescreen',
@@ -14,6 +15,7 @@ export class GameHomescreenComponent implements OnInit {
   flashcards: any[] = [];
   currentCardIndex = 0;
   showFront = true;
+  totalCards = 0;
 
   constructor(private socketService: SocketService) {}
 
@@ -37,22 +39,70 @@ export class GameHomescreenComponent implements OnInit {
   }
 
   nextCard() {
-    if (this.currentCardIndex >= this.flashcards.length - 1) {
-      if (this.currentCardIndex >= this.flashcards.length - 1) {
-        this.currentCardIndex++;  // ← ZÄHLEN!
-        this.isFinished = true;
-        return;
-      }
+    
       this.currentCardIndex++;
       this.showFront = true;
       
+    if (this.currentCardIndex >= this.flashcards.length) {
+      this.isFinished = true;
+      Swal.fire({
+        showClass: {
+          popup: 'swal-show'
+        },
+        hideClass: {
+          popup: 'swal-hide'
+        },
+                
+        title: 'Super!',
+        text: 'Du hast alle Karteikarten geschafft!',
+        icon: 'success',
+        // Hintergrundfarbe des Pop-ups
+        background: '#2e4a7f',
+        // Textfarbe im Pop-up
+        color: '#FFFFFF',
+        // Farbe des Icons (z. B. für den "success"-Haken)
+        iconColor: '#FCBF49',
+        // Farbe des Bestätigungs-Buttons
+        confirmButtonColor: '#FCBF49',
+        confirmButtonText: '<span style="color: black; font-weight: bold;">Cool</span>',
+        customClass: {
+          popup: 'swal-custom-popup'
+        }
+      }).then(() => {
+        this.restartSet();
+        this.currentCardIndex = 0;
+      });
     }
-  
-    this.currentCardIndex++;
-    this.showFront = true;
+    const style = document.createElement('style');
+style.innerHTML = `
+  .swal-show {
+    animation: swalFadeIn 0.4s ease forwards;
   }
+
+  .swal-hide {
+    animation: swalFadeOut 0.3s ease forwards;
+  }
+
+  @keyframes swalFadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes swalFadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(0.8); }
+  }
+  `;
+document.head.appendChild(style);
+
+    }
+    get remainingCards(): number {
+      return this.totalCards - this.currentCardIndex;
+
+    
+  }
+    
   isFinished = false;
-  totalCards = 0;
 
   restartSet() {
     this.currentCardIndex = 0;
@@ -61,9 +111,6 @@ export class GameHomescreenComponent implements OnInit {
   }
   
 
-get remainingCards(): number {
-  return this.totalCards - this.currentCardIndex;
-}
 get progressPercent(): number {
   if (this.totalCards === 0) return 0;
   if (this.isFinished) return 100;

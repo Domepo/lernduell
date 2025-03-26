@@ -36,7 +36,26 @@
   }
 
   .user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* gleichmäßiger Abstand zwischen Blöcken */
+    font-size: 0.95rem;
+  }
+  
+  .user-info .label {
     font-weight: 650;
     color: #ffc107;
   }
+  
+  .user-info .value {
+    color: #ffc107;
+    font-weight: 500;
+  }
+  
+  .user-info .divider {
+    color: #ffc107;
+    font-weight: bold;
+  }
+  
+  
   
