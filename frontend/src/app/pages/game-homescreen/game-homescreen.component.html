@@ -17,18 +17,33 @@
       <!-- Mittlere Spalte -->
       <div class="col-md-6">
         <div class="component-background">
-          <div class="card">
-            <div class="mb-3 p-5 frontside">
-              <h2 class="mb-0">Vorderseite</h2>
-              <p>(Beim Klicken Rückseite)</p>
+          <div class="card p-4 d-flex flex-column justify-content-between" (click)="flipCard()" style="cursor: pointer; min-height: 300px;">
+            
+            <!-- Titel -->
+            <div class="card-title text-start mb-2 fw-bold">
+              {{ currentCard?.[3] }}
+            </div>
+            
+            <!-- Vorder-/Rückseite -->
+            <div class="flex-grow-1 d-flex align-items-center justify-content-center">
+              <h3 class="text-center">
+                {{ showFront ? currentCard?.[1] : currentCard?.[2] }}
+              </h3>
+            </div>
+            
+            <!-- Hinweis -->
+            <div class="text-end mt-2" style="font-size: 0.9rem; color: #ccc;">
+              (Zum Umdrehen klicken)
             </div>
           </div>
+
+          <!-- Buttons -->
           <div class="py-2 d-flex justify-content-between">
             <div class="button-container">
-              <button class="btn">Wusste ich</button>
+              <button class="btn" (click)="nextCard()">Wusste ich</button>
             </div>
             <div class="button-container">
-              <button class="btn">Wusste ich nicht</button>
+              <button class="btn" (click)="nextCard()">Wusste ich nicht</button>
             </div>
           </div>
         </div>

@@ -1,12 +1,47 @@
-import { Component } from '@angular/core';
-import { ScoreboardComponent } from "./scoreboard/scoreboard.component";
+import { Component, OnInit } from '@angular/core';
+import { SocketService } from '../../socket.service';
+import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-game-homescreen',
-  imports: [ScoreboardComponent],
+  standalone: true,
+  imports: [CommonModule, ScoreboardComponent],
   templateUrl: './game-homescreen.component.html',
-  styleUrl: './game-homescreen.component.css'
+  styleUrls: ['./game-homescreen.component.css']
 })
-export class GameHomescreenComponent {
+export class GameHomescreenComponent implements OnInit {
+  flashcards: any[] = [];
+  currentCardIndex = 0;
+  showFront = true;
 
+  constructor(private socketService: SocketService) {}
+
+  ngOnInit() {
+    this.socketService.getFlashcards().subscribe((data: any) => {
+      if (data && data.card) {
+        const card = data.card;
+        if (!this.flashcards.find((c: any) => c[0] === card[0])) {
+          this.flashcards.push(card); // card ist ein Array: [id, front, back, ...]
+        }
+      }
+    });
+  }
+
+  get currentCard() {
+    return this.flashcards[this.currentCardIndex];
+  }
+
+  flipCard() {
+    this.showFront = !this.showFront;
+  }
+
+  nextCard() {
+    this.currentCardIndex++;
+    this.showFront = true;
+
+    if (this.currentCardIndex >= this.flashcards.length) {
+      this.currentCardIndex = 0; // oder Spiel beenden?
+    }
+  }
 }
