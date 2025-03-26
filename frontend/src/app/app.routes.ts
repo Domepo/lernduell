@@ -13,4 +13,6 @@ export const routes: Routes = [
     { path: 'flashcard', component: FlashcardComponent },
     { path: 'login', component: LoginWindowComponent },  // Neue Route für das Login
     { path: '**', redirectTo: '', pathMatch: 'full' }, // Fallback für ungültige Routen
+    { path: 'login', component: LoginWindowComponent },
+   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];

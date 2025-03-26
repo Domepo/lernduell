@@ -5,31 +5,27 @@
       <!-- Logo -->
       <a class="navbar-brand" href="#">Lernduell</a>
 
-      <!-- Toggle-Button für mobile Ansicht -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="user-info ms-auto" *ngIf="auth.isLoggedIn()">
+        Name: {{ auth.name }} | SessionID: {{ auth.session }}
+      </div>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" 
+              aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Navigationslinks -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
-          <li class="nav-item">
-            <a class="nav-link " routerLink="/homepage" routerLinkActive="active">Startseite</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/game-homescreen" routerLinkActive="active">Game</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/flashcard-homescreen" routerLinkActive="active">Flashcard</a>
-          </li>
-
+          <li class="nav-item"><a class="nav-link" routerLink="/login">Login</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/homepage">Startseite</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/game-homescreen">Game</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/flashcard-homescreen">Flashcard</a></li>
         </ul>
       </div>
     </div>
   </nav>
 </div>
 
-
+<!-- Route Content wird hier geladen -->
 <router-outlet></router-outlet>

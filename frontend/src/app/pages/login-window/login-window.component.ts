@@ -1,11 +1,23 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.services'; // <-- dein Pfad!
 
 @Component({
+  standalone: true,
   selector: 'app-login-window',
-  imports: [],
   templateUrl: './login-window.component.html',
-  styleUrl: './login-window.component.css'
+  styleUrls: ['./login-window.component.css'],
+  imports: [FormsModule]
 })
 export class LoginWindowComponent {
+  username: string = '';
+  sessionid: string = '';
 
+  constructor(private authService: AuthService) {}
+
+  onLogin(): void {
+    if (this.username.trim() && this.sessionid.trim()) {
+      this.authService.setUser(this.username, this.sessionid);
+    }
+  }
 }
