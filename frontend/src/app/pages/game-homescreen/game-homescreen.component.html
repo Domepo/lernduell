@@ -28,6 +28,14 @@
             <div class="card-stat">
               Noch {{ remainingCards }}/{{ totalCards }} Karten
             </div>            
+            <div class="set-selection mt-3">
+              <div class="set-card mb-2" [routerLink]="['/game', 'mathe']">Mathe</div>
+              <div class="set-card mb-2" [routerLink]="['/game', 'chemie']">Chemie</div>
+              <div class="set-card mb-2" [routerLink]="['/game', 'astronomie']">Astronomie</div>
+              <div class="set-card mb-2" [routerLink]="['/game', 'germanistik']">Germanistik</div>
+            </div>
+            
+            
           </div>
         </div>
       </div>

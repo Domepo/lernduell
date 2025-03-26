@@ -2,14 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../../socket.service';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-game-homescreen',
   standalone: true,
-  imports: [CommonModule, ScoreboardComponent],
+  imports: [CommonModule, ScoreboardComponent, RouterModule],
   templateUrl: './game-homescreen.component.html',
-  styleUrls: ['./game-homescreen.component.css']
+  styleUrls: ['./game-homescreen.component.css'],
 })
 export class GameHomescreenComponent implements OnInit {
   flashcards: any[] = [];
@@ -17,17 +20,51 @@ export class GameHomescreenComponent implements OnInit {
   showFront = true;
   totalCards = 0;
 
-  constructor(private socketService: SocketService) {}
+  currentSet: string = '';
+
+  constructor(
+    private socketService: SocketService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+  
+  goToGame(setName: string) {
+    this.router.navigate(['/game', setName]);
+  }  
+  
 
   ngOnInit() {
-    this.socketService.getFlashcards().subscribe((data: any) => {
-      const card = data.card;
-      if (card && !this.flashcards.find((c) => c[0] === card[0])) {
-        this.flashcards.push(card);
-        this.totalCards = this.flashcards.length;
+    this.route.params.subscribe(params => {
+      if (params['set_name']) {
+        this.currentSet = params['set_name'];
+  
+        this.flashcards = [];
+        this.totalCards = 0;
+        this.currentCardIndex = 0;
+        this.isFinished = false;
+  
+        this.socketService.emit('getCards', { set_name: this.currentSet });
+  
+        this.socketService.listen('card').subscribe((data: any) => {
+          const card = data.card;
+  
+          if (card && card[5] === this.currentSet) {
+            const exists = this.flashcards.some(c => c[0] === card[0]);
+            if (!exists) {
+              this.flashcards.push(card);
+              this.totalCards = this.flashcards.length;
+            }
+          }
+        });
+      } else {
+        // Default-Verhalten bei /game ohne Parameter
+        console.log("Kein Set ausgewählt.");
       }
     });
   }
+  
+  
+  
   
 
   get currentCard() {
@@ -125,4 +162,5 @@ get progressClass(): string {
 get progressTooltip(): string {
   return `${this.currentCardIndex} von ${this.totalCards} Karteikarten gelernt`;
 }
+
 }

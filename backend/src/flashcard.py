@@ -48,10 +48,11 @@ class FlashcardDB:
     @db_connection
     def insert_flashcard(self, front, back, title, creator, set_name, timestamp):
         self.cursor.execute('''
-        INSERT INTO flashcards (front, back, title, creator, set_name, timestamp)
-        VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO flashcards (front, back, title, creator, set_name, timestamp)
+            VALUES (?, ?, ?, ?, ?, ?)
         ''', (front, back, title, creator, set_name, timestamp))
         print("Neue Flashcard eingefügt.")
+        return self.cursor.lastrowid  # <-- das brauchst du!
 
     @db_connection
     def get_all_flashcards(self):
@@ -79,3 +80,8 @@ class FlashcardDB:
             WHERE id = ?
         ''', (front, back, title, creator, set_name, timestamp, card_id))
         print(f"Flashcard mit ID {card_id} aktualisiert.")
+        
+    @db_connection
+    def get_flashcards_by_set(self, set_name):
+        self.cursor.execute("SELECT * FROM flashcards WHERE set_name = ?", (set_name,))
+        return self.cursor.fetchall()

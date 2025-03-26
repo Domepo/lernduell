@@ -30,17 +30,20 @@ def send_flashcards_loop():
         time.sleep(30)  
 
 @socketio.on('getCards')
-def handle_get_cards(_data=None):
-    send_flashcards()
+def handle_get_cards(data):
+    set_name = data.get('set_name')
+    if not set_name:
+        print("⚠️ Kein Set-Name angegeben!")
+        return
+
+    flashcards = db.get_flashcards_by_set(set_name)
+    for card in flashcards:
+        socketio.emit('card', {'card': card})
 
 @socketio.on('connect')
 def handle_connect():
     print("Neuer Client verbunden.")
-    # send flashcards ohne Hintergrund Aktualisierung, für einen Page Reload
-    send_flashcards()
-    if not hasattr(send_flashcards, 'started'):
-        send_flashcards.started = True
-        socketio.start_background_task(send_flashcards_loop)
+    
 
 @socketio.on('disconnect')
 def handle_disconnect():
@@ -68,8 +71,7 @@ def handle_update_card(data):
         title=data['title'],
         creator=data['creator'],
         set_name=data['set_name'],
-        timestamp=data['timestamp'],
-        marked=data['marked']
+        timestamp=data['timestamp']
     )
     
     # Schicke eine Bestätigung oder die aktualisierten Daten zurück
@@ -84,8 +86,7 @@ def handle_insert_card(data):
         title=data['title'],
         creator=data['creator'],
         set_name=data['set_name'],
-        timestamp=data['timestamp'],
-        marked=data['marked']
+        timestamp=data['timestamp']
     )
 
     # Dann schickst du die neue ID zurück
@@ -97,8 +98,7 @@ def handle_insert_card(data):
       'title': data['title'],
       'creator': data['creator'],
       'set_name': data['set_name'],
-      'timestamp': data['timestamp'],
-      'marked':data['marked']
+      'timestamp': data['timestamp']
     }
     emit('cardUpdated', {'status': 'ok', 'updatedCard': new_card}, broadcast=True)
 

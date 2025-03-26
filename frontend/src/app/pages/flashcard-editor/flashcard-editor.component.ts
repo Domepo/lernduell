@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../../socket.service';
 import { FormsModule } from '@angular/forms'; // <- WICHTIG
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 interface Flashcard {
   id: number;
@@ -27,14 +28,19 @@ export class FlashcardComponent implements OnInit {
   selectedCard: Flashcard | null = null;
   selectedCardId: any;
 
-  constructor(private socketService: SocketService) {}
+  constructor(private socketService: SocketService, private route: ActivatedRoute) {}
 
-  
+
+  currentSet: string = '';
 
   ngOnInit() {
     // frage nach den aktuellen Karten, wenn auf die Seite gegangen wird
-    this.socketService.emit('getCards', {});
-
+    this.route.params.subscribe(params => {
+      this.currentSet = params['set_name'];
+      this.socketService.emit('getCards', { set_name: this.currentSet });
+  
+      
+     
     this.socketService.listen('card').subscribe((data: any) => {
       const newCard: Flashcard = {
         id: data.card[0],
@@ -56,7 +62,7 @@ export class FlashcardComponent implements OnInit {
         this.cards[existingCardIndex] = newCard;
       }
 
-
+    });
     });
 
     this.socketService.listen('cardUpdated').subscribe((res: any) => {
@@ -116,21 +122,19 @@ export class FlashcardComponent implements OnInit {
       front: '',
       back: '',
       creator: '',
-      set_name: '',
+      set_name: this.currentSet, // <-- Wichtig
       timestamp: ''
     };
   }
-  saveCard(card: Flashcard): void {
-    if (card.id === -1) {
-      // Hier fügst du eine völlig neue Karte hinzu
-      // Du könntest ein eigenes Socket-Event 'insertCard' verwenden
-      // oder 'updateCard' so programmieren, dass es automatisch ein Insert macht, wenn id=-1
-      this.socketService.emit('insertCard', card);
-    } else {
-      // Vorhandene Karte aktualisieren
-      this.socketService.emit('updateCard', card);
+  
+    saveCard(card: Flashcard): void {
+      if (card.id === -1) {
+        this.socketService.emit('insertCard', card);
+      } else {
+        this.socketService.emit('updateCard', card);
+      }
     }
-  }
+    
   deleteCard(card: Flashcard): void {
     // Schicke ein deleteCard-Event an den Server
     this.socketService.emit('deleteCard', { id: card.id });
