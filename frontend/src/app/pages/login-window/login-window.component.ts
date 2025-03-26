@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.services'; // <-- dein Pfad!
+import { AuthService } from '../../services/auth.services';
 
 @Component({
   standalone: true,

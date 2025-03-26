@@ -68,7 +68,8 @@ def handle_update_card(data):
         title=data['title'],
         creator=data['creator'],
         set_name=data['set_name'],
-        timestamp=data['timestamp']
+        timestamp=data['timestamp'],
+        marked=data['marked']
     )
     
     # Schicke eine Bestätigung oder die aktualisierten Daten zurück
@@ -83,7 +84,8 @@ def handle_insert_card(data):
         title=data['title'],
         creator=data['creator'],
         set_name=data['set_name'],
-        timestamp=data['timestamp']
+        timestamp=data['timestamp'],
+        marked=data['marked']
     )
 
     # Dann schickst du die neue ID zurück
@@ -95,7 +97,8 @@ def handle_insert_card(data):
       'title': data['title'],
       'creator': data['creator'],
       'set_name': data['set_name'],
-      'timestamp': data['timestamp']
+      'timestamp': data['timestamp'],
+      'marked':data['marked']
     }
     emit('cardUpdated', {'status': 'ok', 'updatedCard': new_card}, broadcast=True)
 

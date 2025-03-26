@@ -72,10 +72,7 @@ get progressPercent(): number {
 
 get progressClass(): string {
   if (this.isFinished) return 'bg-success';
-  const percent = this.progressPercent;
-  if (percent >= 80) return 'bg-success';
-  if (percent >= 50) return 'bg-warning';
-  return 'bg-danger';
+  return 'bg-warning';
 }
 
 get progressTooltip(): string {

@@ -6,7 +6,7 @@
       <a class="navbar-brand" href="#">Lernduell</a>
 
       <div class="user-info ms-auto" *ngIf="auth.isLoggedIn()">
-        Name: {{ auth.name }} | SessionID: {{ auth.session }}
+        Name: {{ auth.name }} | Session: {{ auth.session }}
       </div>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
