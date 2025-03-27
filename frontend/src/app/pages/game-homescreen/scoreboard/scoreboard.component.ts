@@ -13,10 +13,10 @@ export class ScoreboardComponent {
     { name: 'Dominik Teichröb' },
     { name: 'Sujan Sirimorhan' },
     { name: 'Raul Kirsch' },
-    { name: 'Jens Müller' },
-    { name: 'Rainer Rasche' },
+    { name: 'Juliane Osterfrau' },
+    { name: 'Hanna Bechthold' },
     { name: 'Bernd Zehner' },
-    { name: 'Julian Nagelsmann' },
+    { name: 'Kiara Hesse' },
     { name: 'Uwe Schüler' }
   ];
 
