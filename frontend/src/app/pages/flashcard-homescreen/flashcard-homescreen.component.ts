@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 export class FlashcardHomescreenComponent {
   constructor(private router: Router) {}
 
-  navigateToSet(setId: string) {
-    this.router.navigate(["/flashcard"]); 
-    //this.router.navigate([`/flashcard/${setId}`]); // Ersetze '/set/' durch deinen gewünschten Pfad
+  navigateToSet(setName: string) {
+    this.router.navigate([`/editor/${setName}`]);
   }
+  
 }

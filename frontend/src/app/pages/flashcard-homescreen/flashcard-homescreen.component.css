@@ -51,7 +51,36 @@
     background-color: #2e4a7f;
   }
 
-  .card-footer {
-    background-color: #f9c74f;
-    font-weight: 700;
+  .card {
+    background-color: #243b6a;
+    border: none;
+    border-radius: 10px; /* <- das ist wichtig */
+    overflow: hidden; /* optional, damit Inhalte nicht überstehen */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
   }
+  
+  
+  /* Hover-Effekt */
+  .card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4); /* gelber Glow */
+  }
+  
+  /* Klick-Effekt */
+  .card:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Gelber Footer */
+.card-footer {
+  background-color: #f9c74f;
+  color: #000;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}

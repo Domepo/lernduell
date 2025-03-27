@@ -13,11 +13,21 @@ export class SocketService {
     this.socket = io('http://localhost:3000/');
   }
 
-  listen(eventName: string) {
+  listen(eventName: string): Observable<any> {
     return new Observable((subscriber) => {
       this.socket.on(eventName, data => {
-        subscriber.next(data)
-      })
-    })
+        subscriber.next(data);
+      });
+    });
+  }
+
+  emit(eventName: string, data: any = null): void {
+    this.socket.emit(eventName, data);
+  }
+
+  // NEU: Hilfsmethode zum Abholen der Flashcards
+  getFlashcards(): Observable<any> {
+    this.emit('getCards'); // Triggert das Backend
+    return this.listen('card'); // Hört auf Karten
   }
 }

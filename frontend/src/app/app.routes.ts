@@ -3,14 +3,16 @@ import { GameHomescreenComponent } from './pages/game-homescreen/game-homescreen
 import { FlashcardHomescreenComponent } from './pages/flashcard-homescreen/flashcard-homescreen.component';
 import { HomescreenComponent } from './pages/homescreen/homescreen.component';
 import { FlashcardComponent } from './pages/flashcard-editor/flashcard-editor.component';
-
+import { LoginWindowComponent } from './pages/login-window/login-window.component';  // Importiere die Login-Komponente
 
 export const routes: Routes = [
-    { path: '', component: HomescreenComponent,pathMatch: 'full' }, // Root-Seite ist AppComponent
-    { path: 'homepage', component: HomescreenComponent }, // Root-Seite ist AppComponent
-    { path: 'game-homescreen', component: GameHomescreenComponent },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },  
+    { path: 'login', component: LoginWindowComponent },
+    { path: 'homepage', component: HomescreenComponent },
+    { path: 'game/:set_name', component: GameHomescreenComponent },
+    { path: 'game', component: GameHomescreenComponent },
     { path: 'flashcard-homescreen', component: FlashcardHomescreenComponent },
-    { path: 'flashcard', component: FlashcardComponent }, 
-    { path: '**', redirectTo: '', pathMatch: 'full' },
-    
-];
+    { path: 'editor/:set_name', component: FlashcardComponent },
+    { path: '**', redirectTo: '/login', pathMatch: 'full' }
+  ];
+  

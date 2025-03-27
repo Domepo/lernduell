@@ -1,114 +1,193 @@
 .container-fluid {
-    height: 100vh;
-    background-color: #2e4a7f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .row {
-    width: 100%;
-  }
-  
-  .list-group-item {
-    border-radius: 0.5rem !important; 
-    border: none !important;       
-    box-shadow: none; 
-    cursor: pointer;
-    background-color: #1d2d50;
-  }
-  
-  .list-group-item:hover {
-    background-color: #ff8f00;
-    color: #000;
-  }
-  
-  .form-group label {
-    font-weight: bold;
-  }
-  
-  button {
-    font-size: 1.2rem;
-    padding: 10px 20px;
-  }
-  
-  .rechter-Block{
-    color: white;
-  }
+  height: 100vh;
+  background-color: #2e4a7f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .Liste {
-    background-color: #243b6a46;
-    border-radius: 10px;
-    padding: 1px;
-  }
-  .styled-input {
-    background-color: #2d2d2d; /* Dunkler Hintergrund */
-    color: #ffffff;           /* Weißer Text */
-    padding: 10px;            /* Innerer Abstand */
-    font-family: Arial, sans-serif; /* Schriftart */
-    font-size: 16px;          /* Schriftgröße */
-    border: none;             /* Kein Rahmen */
-    border-radius: 4px;       /* Abgerundete Ecken */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* Leichter Schatten */
-    width: 300px;             /* Breite des Eingabefeldes */
-    outline: none;            /* Kein blauer Rand beim Fokussieren */
-  }
-  
-  .styled-input::placeholder {
-    color: #bfbfbf; /* Platzhalterfarbe */
-  }
-  .input-container {
-    display: inline-block;
-    text-align: left;
-    width: 100%; /* Container füllt verfügbare Breite */
-    max-width: 1200px;
-    margin: auto;
-  }
+.row {
+  width: 100%;
+}
 
-  .styled-textarea {
-    display: block; /* Sicherstellen, dass die Textarea unter dem Label ist */
-    margin-bottom: 20px; /* Abstand zwischen Textareas */
-    background-color: #2d2d2d;
-    color: #ffffff;
-    padding: 10px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    max-width: 1200px;
-    min-height: 50px;
-    resize: none;
-    overflow: hidden;
-  }
-  .custom-label {
-    font-size: 20px; /* Schriftgröße */
-    font-weight: bold; /* Fettschrift */
-  }
-  
-  .styled-textarea::placeholder {
-    color: #bfbfbf; /* Platzhalterfarbe */
-  }
-  .button-container button {
-    background-color: #ffc107; /* Gelb/Orange */
-    color: #000000; /* Schwarzer Text */
-    border: none; /* Kein Rahmen */
-    border-radius: 25px; /* Abgerundete Ecken */
-    padding: 10px 20px; /* Abstand innen (Höhe und Breite) */
-    font-size: 16px; /* Schriftgröße */
-    font-weight: bold; /* Fettgedruckte Schrift */
-    cursor: pointer; /* Zeigt Zeiger-Cursor beim Hover */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Schatteneffekt */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Sanfte Übergänge */
-  }
-  
-  .button-container button:hover {
-    background-color: #ffa000; /* Dunkleres Gelb/Orange beim Hover */
-    transform: scale(1.05); /* Leichte Vergrößerung beim Hover */
-  }
-  
-  .button-container button:active {
-    background-color: #ff8f00; /* Noch dunkler bei Klick */
-    transform: scale(0.95); /* Leichtes Schrumpfen beim Klicken */
-  }
+.list-group-item {
+  border-radius: 0.5rem !important;
+  border: none !important;
+  box-shadow: none;
+  cursor: pointer;
+  background-color: #1d2d50;
+}
+
+.list-group-item:hover {
+  background-color: #ff8f00;
+  color: #000;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+button {
+  font-size: 1.2rem;
+  padding: 10px 20px;
+}
+
+.rechter-Block {
+  color: white;
+}
+
+.Liste {
+  background-color: #243b6a46;
+  border-radius: 10px;
+  padding: 1px;
+}
+
+.styled-input {
+  background-color: #2d2d2d;
+  /* Dunkler Hintergrund */
+  color: #ffffff;
+  /* Weißer Text */
+  padding: 10px;
+  /* Innerer Abstand */
+  font-family: Arial, sans-serif;
+  /* Schriftart */
+  font-size: 16px;
+  /* Schriftgröße */
+  border: none;
+  /* Kein Rahmen */
+  border-radius: 4px;
+  /* Abgerundete Ecken */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  /* Leichter Schatten */
+  width: 300px;
+  /* Breite des Eingabefeldes */
+  outline: none;
+  /* Kein blauer Rand beim Fokussieren */
+}
+
+.styled-input::placeholder {
+  color: #bfbfbf;
+  /* Platzhalterfarbe */
+}
+
+.input-container {
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+  /* Container füllt verfügbare Breite */
+  max-width: 1200px;
+  margin: auto;
+}
+
+.styled-textarea {
+  display: block;
+  /* Sicherstellen, dass die Textarea unter dem Label ist */
+  margin-bottom: 20px;
+  /* Abstand zwischen Textareas */
+  background-color: #2d2d2d;
+  color: #ffffff;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  max-width: 1200px;
+  min-height: 50px;
+  resize: none;
+  overflow: hidden;
+}
+
+.custom-label {
+  font-size: 20px;
+  /* Schriftgröße */
+  font-weight: bold;
+  /* Fettschrift */
+}
+
+.styled-textarea::placeholder {
+  color: #bfbfbf;
+  /* Platzhalterfarbe */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  /* Abstand zwischen den Buttons */
+}
+
+.button-container button {
+  background-color: #ffc107;
+  /* Gelb/Orange */
+  color: #000000;
+  /* Schwarzer Text */
+  border: none;
+  /* Kein Rahmen */
+  border-radius: 25px;
+  /* Abgerundete Ecken */
+  padding: 10px 20px;
+  /* Abstand innen (Höhe und Breite) */
+  font-size: 16px;
+  /* Schriftgröße */
+  font-weight: bold;
+  /* Fettgedruckte Schrift */
+  cursor: pointer;
+  /* Zeigt Zeiger-Cursor beim Hover */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  /* Schatteneffekt */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  /* Sanfte Übergänge */
+}
+
+.button-container button:hover {
+  background-color: #ffa000;
+  /* Dunkleres Gelb/Orange beim Hover */
+  transform: scale(1.05);
+  /* Leichte Vergrößerung beim Hover */
+}
+
+.button-container button:active {
+  background-color: #ff8f00;
+  /* Noch dunkler bei Klick */
+  transform: scale(0.95);
+  /* Leichtes Schrumpfen beim Klicken */
+}
+
+/* Nur für das grüne Plus-Symbol */
+.list-group-item.bg-success {
+  background-color: #28a745 !important;
+  color: #fff !important;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 2px 8px;
+  /* Weniger Höhe */
+  width: 500px;
+  /* Schmaler */
+  margin: 0 auto 10px auto;
+  /* Zentrieren & Abstand unten */
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  line-height: 1.2;
+
+}
+
+/* Hover-Effekt */
+.list-group-item.bg-success:hover {
+  background-color: #26973e !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 255, 0, 0.3);
+}
+
+/* Klick-Effekt */
+.list-group-item.bg-success:active {
+  transform: scale(0.95);
+  background-color: #1e7e34 !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+.list-group-item span {
+  font-size: 1.2rem;
+}
