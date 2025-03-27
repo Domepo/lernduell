@@ -1,8 +1,12 @@
+import eventlet
+# For production
+eventlet.monkey_patch()
 from flask import Flask
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 import time
 from flashcard import FlashcardDB
+
 
 app = Flask(__name__)
 db = FlashcardDB("backend/database/flashcards.db")
