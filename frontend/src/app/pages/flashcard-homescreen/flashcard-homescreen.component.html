@@ -1,0 +1,64 @@
+<div class="game-background">
+    <div class="container text-center py-4">
+        <h1 style="color: white;">Karteikarten erstellen</h1>
+
+            <!-- Kartenreihe -->
+        <div class="component-background-p1">
+            <div class="p-3">
+                <div class="row justify-content-center mt-4">
+
+                        <!-- Lernset erstellen Karte -->
+                        <div class="col-12 col-sm-4 col-md-3 mb-3">
+                            <div class="card border text-center" (click)="navigateToSet('set1')">
+                                <div class="card-body">
+                                    <div class="display-1">+</div>
+                                </div>
+                                <div class="card-footer">Lernset erstellen</div>
+                            </div>
+                        </div>
+                    
+                    <!-- Lernset bearbeiten Karte (mit Bild) -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('mathe')">
+                            <div class="card-body">
+                                <img src="math.png" class="img-fluid" alt="Lernset bearbeiten" style="max-width: 100px; height: auto;">
+                            </div>
+                            <div class="card-footer">Mathe</div>
+                        </div>
+                    </div>
+
+                    <!-- Lernset bearbeiten Karte (Text "SD") -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('chemie')">
+                            <div class="card-body">
+                                <img src="chemie.png" class="img-fluid" alt="Lernset bearbeiten" style="max-width: 100px; height: auto;">
+
+                            </div>
+                            <div class="card-footer">Chemie</div>
+                        </div>
+                    </div>
+
+                    <!-- TEST -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('astronomie')">
+                            <div class="card-body">
+                                <img src="universe.png" class="img-fluid" alt="Lernset bearbeiten" style="max-width: 100px; height: auto;">
+                            </div>
+                            <div class="card-footer">Astronomie</div>
+                        </div>
+                    </div>
+
+                    <!-- TEST -->
+                    <div class="col-12 col-sm-4 col-md-3 mb-3">
+                        <div class="card border text-center" (click)="navigateToSet('germanistik')">
+                            <div class="card-body">
+                                <img src="book.png" class="img-fluid" alt="Lernset bearbeiten" style="max-width: 100px; height: auto;">
+                            </div>
+                            <div class="card-footer">Germanistik</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

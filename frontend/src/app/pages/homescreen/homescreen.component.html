@@ -1,0 +1,26 @@
+<div class="game-background">
+  <div class="container text-center">
+      <!-- Titel -->
+      <h1 class="mb-5 p-3" style="color: white;">Hauptmenü</h1>
+
+      <!-- Obere Kartenreihe -->
+      <div class="container mt-5">
+          <div class="row justify-content-center mb-3">
+              <div class="col-4 text-center">
+                  <div class="button-container">
+                      <button class="btn" (click)="navigateTo('/game')">Spielen</button>
+                  </div>
+              </div>
+              <div class="col-4 text-center">
+                  <div class="button-container">
+                      <button class="btn" (click)="navigateTo('/flashcard-homescreen')">Karteikarten editieren</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div style="margin-top: 100px;">
+          <app-scoreboard></app-scoreboard>
+      </div>
+  </div>
+</div>

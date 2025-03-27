@@ -1,0 +1,61 @@
+/* Allgemeine Stile */
+
+  /* Navigation */
+  .custom-navbar {
+    background-color: #243b6a; /* Anpassbare Farbe */
+    color: #fff;
+  }
+  
+  .navbar-brand {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .nav-link {
+    color: #fff;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #f9c64f3d; /* Beispiel Hover-Effekt */
+  }
+  
+  .nav-link.active {
+    color: #f9c74f;
+    font-weight: bold;
+  }
+  
+  /* Hauptinhalt */
+  .content-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e6e6e6; /* Beispielhintergrund für den Inhaltsbereich */
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 16px; /* gleichmäßiger Abstand zwischen Blöcken */
+    font-size: 0.95rem;
+  }
+  
+  .user-info .label {
+    font-weight: 650;
+    color: #ffc107;
+  }
+  
+  .user-info .value {
+    color: #ffc107;
+    font-weight: 500;
+  }
+  
+  .user-info .divider {
+    color: #ffc107;
+    font-weight: bold;
+  }
+  
+  
+  

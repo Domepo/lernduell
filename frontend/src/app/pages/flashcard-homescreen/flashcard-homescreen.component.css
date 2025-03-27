@@ -1,0 +1,86 @@
+.frontside {
+    color: white;
+    height: 400px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .component-background {
+    background-color: #243b6a46;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .component-background-p1 {
+    background-color: #243b6a46;
+    border-radius: 10px;
+    padding: 1px;
+  }
+  .card-stat {
+    background-color: #1d2d50;
+    color: white;
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .card {
+    background-color: #243b6a;
+    border: #000;
+  }
+
+  .card-button {
+    background-color: #f9c74f;
+    color: #000;
+    padding: 8px 10px;
+    border-radius: 5px;
+  }
+
+  .card-body {
+    background-color: #243b6a46;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .display-1 {
+    color: white;
+  }
+  .game-background {
+    height: 100%;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #2e4a7f;
+  }
+
+  .card {
+    background-color: #243b6a;
+    border: none;
+    border-radius: 10px; /* <- das ist wichtig */
+    overflow: hidden; /* optional, damit Inhalte nicht überstehen */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  
+  
+  /* Hover-Effekt */
+  .card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4); /* gelber Glow */
+  }
+  
+  /* Klick-Effekt */
+  .card:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Gelber Footer */
+.card-footer {
+  background-color: #f9c74f;
+  color: #000;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}

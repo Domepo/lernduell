@@ -2,7 +2,7 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "gh-pages" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
@@ -28,9 +28,15 @@ jobs:
 
     - name: Build Angular App
       run: npm run build
-      
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+
+    - name: Configure Git User
+      run: |
+        git config --global user.email "dominiktb2@gmail.com"
+        git config --global user.name "Domepo"
+
+    - name: Deploy to GH pages
+      run: |
+        npx angular-cli-ghpages --dir=dist/lernduell/browser --no-silent
+      env:
+        CI: true
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
