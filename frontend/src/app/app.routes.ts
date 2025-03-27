@@ -12,7 +12,6 @@ export const routes: Routes = [
     { path: 'game/:set_name', component: GameHomescreenComponent },
     { path: 'game', component: GameHomescreenComponent },
     { path: 'flashcard-homescreen', component: FlashcardHomescreenComponent },
-    { path: 'flashcard', component: FlashcardComponent },
     { path: 'editor/:set_name', component: FlashcardComponent },
     { path: '**', redirectTo: '/login', pathMatch: 'full' }
   ];
