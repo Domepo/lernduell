@@ -62,6 +62,7 @@ def handle_update_card(data):
       'creator': 'John Doe',
       'set_name': 'Basics',
       'timestamp': '2025-01-01 12:00:00'
+      'marked' : 'true'
     }
     """
     db.update_flashcard(
@@ -71,7 +72,8 @@ def handle_update_card(data):
         title=data['title'],
         creator=data['creator'],
         set_name=data['set_name'],
-        timestamp=data['timestamp']
+        timestamp=data['timestamp'],
+        marked = data['marked']
     )
     
     # Schicke eine Bestätigung oder die aktualisierten Daten zurück
@@ -86,7 +88,8 @@ def handle_insert_card(data):
         title=data['title'],
         creator=data['creator'],
         set_name=data['set_name'],
-        timestamp=data['timestamp']
+        timestamp=data['timestamp'],
+        marked = data['marked']
     )
 
     # Dann schickst du die neue ID zurück
@@ -98,7 +101,8 @@ def handle_insert_card(data):
       'title': data['title'],
       'creator': data['creator'],
       'set_name': data['set_name'],
-      'timestamp': data['timestamp']
+      'timestamp': data['timestamp'],
+      'marked' : data['marked']
     }
     emit('cardUpdated', {'status': 'ok', 'updatedCard': new_card}, broadcast=True)
 
@@ -116,3 +120,4 @@ def handle_delete_card(data):
 # Server starten
 if __name__ == "__main__":
     socketio.run(app, host='0.0.0.0', port=port)
+

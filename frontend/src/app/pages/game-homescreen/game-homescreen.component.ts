@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { RouterModule } from '@angular/router';
+import type { Flashcard } from '../flashcard-editor/flashcard-editor.component';
+
 
 @Component({
   selector: 'app-game-homescreen',
@@ -26,35 +28,45 @@ export class GameHomescreenComponent implements OnInit {
     private socketService: SocketService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
-  
+  ) { }
+
   goToGame(setName: string) {
     this.router.navigate(['/game', setName]);
-  }  
-  
+  }
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['set_name']) {
         this.currentSet = params['set_name'];
-  
+
         this.flashcards = [];
         this.totalCards = 0;
         this.currentCardIndex = 0;
         this.isFinished = false;
-  
+
         this.socketService.emit('getCards', { set_name: this.currentSet });
-  
+
         this.socketService.listen('card').subscribe((data: any) => {
           const card = data.card;
-  
+
           if (card && card[5] === this.currentSet) {
-            const exists = this.flashcards.some(c => c[0] === card[0]);
+            const exists = this.flashcards.some(c => c.id === card[0]);
             if (!exists) {
-              this.flashcards.push(card);
+              this.flashcards.push({
+                id: card[0],
+                front: card[1],
+                back: card[2],
+                title: card[3],
+                creator: card[4],
+                set_name: card[5],
+                timestamp: card[6],
+                marked: card[7]
+              });
               this.totalCards = this.flashcards.length;
             }
           }
+
         });
       } else {
         // Default-Verhalten bei /game ohne Parameter
@@ -62,10 +74,10 @@ export class GameHomescreenComponent implements OnInit {
       }
     });
   }
-  
-  
-  
-  
+
+
+
+
 
   get currentCard() {
     return this.flashcards[this.currentCardIndex];
@@ -76,10 +88,10 @@ export class GameHomescreenComponent implements OnInit {
   }
 
   nextCard() {
-    
-      this.currentCardIndex++;
-      this.showFront = true;
-      
+
+    this.currentCardIndex++;
+    this.showFront = true;
+
     if (this.currentCardIndex >= this.flashcards.length) {
       this.isFinished = true;
       Swal.fire({
@@ -89,7 +101,7 @@ export class GameHomescreenComponent implements OnInit {
         hideClass: {
           popup: 'swal-hide'
         },
-                
+
         title: 'Super!',
         text: 'Du hast alle Karteikarten aus diesem Set geschafft!',
         icon: 'success',
@@ -111,7 +123,7 @@ export class GameHomescreenComponent implements OnInit {
       });
     }
     const style = document.createElement('style');
-style.innerHTML = `
+    style.innerHTML = `
   .swal-show {
     animation: swalFadeIn 0.4s ease forwards;
   }
@@ -130,15 +142,15 @@ style.innerHTML = `
     to   { opacity: 0; transform: scale(0.8); }
   }
   `;
-document.head.appendChild(style);
+    document.head.appendChild(style);
 
-    }
-    get remainingCards(): number {
-      return this.totalCards - this.currentCardIndex;
-
-    
   }
-    
+  get remainingCards(): number {
+    return this.totalCards - this.currentCardIndex;
+
+
+  }
+
   isFinished = false;
 
   restartSet() {
@@ -146,21 +158,37 @@ document.head.appendChild(style);
     this.showFront = true;
     this.isFinished = false;
   }
-  
 
-get progressPercent(): number {
-  if (this.totalCards === 0) return 0;
-  if (this.isFinished) return 100;
-  return Math.floor((this.currentCardIndex / this.totalCards) * 100);
-}
 
-get progressClass(): string {
-  if (this.isFinished) return 'bg-success';
-  return 'bg-warning';
-}
+  get progressPercent(): number {
+    if (this.totalCards === 0) return 0;
+    if (this.isFinished) return 100;
+    return Math.floor((this.currentCardIndex / this.totalCards) * 100);
+  }
 
-get progressTooltip(): string {
-  return `${this.currentCardIndex} von ${this.totalCards} Karteikarten gelernt`;
-}
+  get progressClass(): string {
+    if (this.isFinished) return 'bg-success';
+    return 'bg-warning';
+  }
+
+  get progressTooltip(): string {
+    return `${this.currentCardIndex} von ${this.totalCards} Karteikarten gelernt`;
+  }
+
+  toggleMark(card: Flashcard) {
+    card.marked = !card.marked;
+
+    // Änderung an den Server schicken
+    this.socketService.emit('updateCard', {
+      id: card.id,
+      front: card.front,
+      back: card.back,
+      title: card.title,
+      creator: card.creator,
+      set_name: card.set_name,
+      timestamp: card.timestamp,
+      marked: card.marked
+    });
+  }
 
 }

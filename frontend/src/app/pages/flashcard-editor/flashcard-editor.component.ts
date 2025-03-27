@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms'; // <- WICHTIG
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 
-interface Flashcard {
+export interface Flashcard {
   id: number;
   front: string;
   back: string;
@@ -12,6 +12,7 @@ interface Flashcard {
   creator: string;
   set_name: string;
   timestamp: string;
+  marked?: boolean;
 }
 
 @Component({
@@ -19,8 +20,8 @@ interface Flashcard {
   templateUrl: './flashcard-editor.component.html',
   styleUrls: ['./flashcard-editor.component.css'],
   imports: [
-    CommonModule,    
-    FormsModule,  
+    CommonModule,
+    FormsModule,
   ],
 })
 export class FlashcardComponent implements OnInit {
@@ -28,7 +29,7 @@ export class FlashcardComponent implements OnInit {
   selectedCard: Flashcard | null = null;
   selectedCardId: any;
 
-  constructor(private socketService: SocketService, private route: ActivatedRoute) {}
+  constructor(private socketService: SocketService, private route: ActivatedRoute) { }
 
 
   currentSet: string = '';
@@ -38,35 +39,39 @@ export class FlashcardComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.currentSet = params['set_name'];
       this.socketService.emit('getCards', { set_name: this.currentSet });
-  
-      
-     
-    this.socketService.listen('card').subscribe((data: any) => {
-      const newCard: Flashcard = {
-        id: data.card[0],
-        front: data.card[1],
-        back: data.card[2],
-        title: data.card[3],
-        creator: data.card[4],
-        set_name: data.card[5],
-        timestamp: data.card[6]
-      };
-    
-      const existingCardIndex = this.cards.findIndex(card => card.id === newCard.id);
-      // === ist ohne Typumwandlung
-      if (existingCardIndex === -1) {
-        // Falls nicht vorhanden, neu ins Array pushen
-        this.cards.push(newCard);
-      } else {
-        // Ansonsten bestehende Karte aktualisieren
-        this.cards[existingCardIndex] = newCard;
-      }
 
-    });
+
+
+      this.socketService.listen('card').subscribe((data: any) => {
+        const newCard: Flashcard = {
+          id: data.card[0],
+          front: data.card[1],
+          back: data.card[2],
+          title: data.card[3],
+          creator: data.card[4],
+          set_name: data.card[5],
+          timestamp: data.card[6],
+          marked: data.card[7] ?? false
+        };
+
+        const existingCardIndex = this.cards.findIndex(card => card.id === newCard.id);
+        // === ist ohne Typumwandlung
+        if (existingCardIndex === -1) {
+          // Falls nicht vorhanden, neu ins Array pushen
+          this.cards.push(newCard);
+        } else {
+          // Ansonsten bestehende Karte aktualisieren
+          this.cards[existingCardIndex] = newCard;
+        }
+
+      });
     });
 
     this.socketService.listen('cardUpdated').subscribe((res: any) => {
-      const updatedCard = res.updatedCard as Flashcard;
+      const updatedCard = {
+        ...res.updatedCard,
+        marked: res.updatedCard.marked ?? false
+      } as Flashcard;      
       const idx = this.cards.findIndex((c) => c.id === updatedCard.id);
       if (idx !== -1) {
         this.cards[idx] = { ...this.cards[idx], ...updatedCard };
@@ -89,17 +94,17 @@ export class FlashcardComponent implements OnInit {
         this.selectedCard = null;
       }
     });
-  
+
 
   }
   selectCard(card: Flashcard): void {
     // Das ist jetzt die Karte, die in den Textareas editierbar sein soll
-    this.selectedCard = card; 
+    this.selectedCard = card;
     this.selectedCardId = card.id;
     console.log(card);
     // Wichtig: ggf. eine Kopie erstellen, falls du nicht sofort das Original überschreiben willst
   }
-  updateSelectedCard(card: Flashcard){
+  updateSelectedCard(card: Flashcard) {
     const test = this.cards.findIndex(card => card.id === this.selectedCardId)
     this.selectedCard = this.cards[test];
   }
@@ -112,7 +117,8 @@ export class FlashcardComponent implements OnInit {
       title: card.title,
       creator: card.creator,
       set_name: card.set_name,
-      timestamp: card.timestamp
+      timestamp: card.timestamp,
+      marked: card.marked
     });
   }
   createNewCard(): void {
@@ -123,18 +129,25 @@ export class FlashcardComponent implements OnInit {
       back: '',
       creator: '',
       set_name: this.currentSet, // <-- Wichtig
-      timestamp: ''
+      timestamp: '',
+      marked: false
     };
   }
+
+  saveCard(card: Flashcard): void {
+    const cardToSend = {
+      ...card,
+      marked: card.marked ?? false // sicherstellen, dass es ein bool ist
+    };
   
-    saveCard(card: Flashcard): void {
-      if (card.id === -1) {
-        this.socketService.emit('insertCard', card);
-      } else {
-        this.socketService.emit('updateCard', card);
-      }
+    if (card.id === -1) {
+      this.socketService.emit('insertCard', cardToSend);
+    } else {
+      this.socketService.emit('updateCard', cardToSend);
     }
-    
+  }
+  
+
   deleteCard(card: Flashcard): void {
     // Schicke ein deleteCard-Event an den Server
     this.socketService.emit('deleteCard', { id: card.id });

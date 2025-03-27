@@ -15,6 +15,7 @@
             <div *ngFor="let card of cards">
               <!-- Beim Klick auf den Titel -> selectCard(card) -->
               <li class="list-group-item text-light mb-2" (click)="selectCard(card)">
+                <span *ngIf="card.marked" style="color: gold;">★ </span>
                 {{ card.title }}
               </li>
             </div>
@@ -22,25 +23,32 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Rechter Block -->
     <div class="col-md-8" *ngIf="selectedCard as card">
       <div class="rechter-block">
-        <h2 class="text-center">{{ card.id < 0 ? 'Neue Karte erstellen' : card.title }}</h2>
+        <h2 class="text-center">
+          {{ card.id < 0 ? 'Neue Karte erstellen' : card.title }}
+          <span *ngIf="card.marked" style="color: gold; margin-left: 8px;">★</span>
+        </h2>
+        
 
-        <label for="titel" class="custom-label">Titel</label>
-        <textarea id="titel" class="styled-textarea" placeholder="Titel eingeben" [value]="card.title" (input)="card.title = $any($event.target).value"></textarea>
+            <label for="titel" class="custom-label">Titel</label>
+            <textarea id="titel" class="styled-textarea" placeholder="Titel eingeben" [value]="card.title"
+              (input)="card.title = $any($event.target).value"></textarea>
 
-        <label for="vorderseite" class="custom-label">Vorderseite</label>
-        <textarea id="vorderseite" class="styled-textarea" placeholder="Vorderseite Inhalt" [value]="card.front" (input)="card.front = $any($event.target).value"></textarea>
+            <label for="vorderseite" class="custom-label">Vorderseite</label>
+            <textarea id="vorderseite" class="styled-textarea" placeholder="Vorderseite Inhalt" [value]="card.front"
+              (input)="card.front = $any($event.target).value"></textarea>
 
-        <label for="rueckseite" class="custom-label">Rückseite</label>
-        <textarea id="rueckseite" class="styled-textarea" placeholder="Rückseite Inhalt" [value]="card.back" (input)="card.back = $any($event.target).value"></textarea>
+            <label for="rueckseite" class="custom-label">Rückseite</label>
+            <textarea id="rueckseite" class="styled-textarea" placeholder="Rückseite Inhalt" [value]="card.back"
+              (input)="card.back = $any($event.target).value"></textarea>
 
-        <div class="mt-4 text-center button-container">
-          <button (click)="saveCard(card)">Speichern</button>
-          <button class="btn btn-danger ms-2" (click)="deleteCard(card)">Löschen</button>
-        </div>
+            <div class="mt-4 text-center button-container">
+              <button (click)="saveCard(card)">Speichern</button>
+              <button class="btn btn-danger ms-2" (click)="deleteCard(card)">Löschen</button>
+            </div>
       </div>
     </div>
   </div>
