@@ -64,6 +64,7 @@ class FlashcardDB:
                 creator,
                 set_name,
                 timestamp,
+                marked
             ),
         )
         print("Neue Flashcard eingefügt.")
