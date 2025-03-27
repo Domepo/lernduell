@@ -1,13 +1,8 @@
 # BUILD:
 # docker build -t lernduell-app .
 # RUN:
-# docker run -p 80:80 -p 3000:3000 --rm lernduell-app
-#
-# bauen -> in ornder -> nginx ws -> python script
-#
-#
-#
-#
+# docker run -p 80:80 --rm lernduell-app
+
 # === STAGE 1: Build Angular App ===
 FROM node:23 AS frontend-builder
 
@@ -46,6 +41,7 @@ COPY --from=frontend-builder /app/frontend/dist/lernduell/browser /usr/share/ngi
 
 # NGINX config
 COPY nginx.conf /etc/nginx/nginx.conf
+
 
 # Expose ports (adjust if needed)
 EXPOSE 80 3000
