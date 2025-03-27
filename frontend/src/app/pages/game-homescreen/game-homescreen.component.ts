@@ -91,7 +91,7 @@ export class GameHomescreenComponent implements OnInit {
         },
                 
         title: 'Super!',
-        text: 'Du hast alle Karteikarten geschafft!',
+        text: 'Du hast alle Karteikarten aus diesem Set geschafft!',
         icon: 'success',
         // Hintergrundfarbe des Pop-ups
         background: '#2e4a7f',
