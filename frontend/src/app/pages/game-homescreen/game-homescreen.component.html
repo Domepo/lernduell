@@ -65,10 +65,10 @@
           <!-- Buttons -->
           <div class="py-2 d-flex justify-content-between">
             <div class="button-container">
-              <button class="btn" (click)="nextCard()">Wusste ich</button>
+              <button class="btn" (click)="nextCard()" [disabled]="!currentSet || flashcards.length === 0">Wusste ich</button>
             </div>
             <div class="button-container">
-              <button class="btn" (click)="nextCard()">Wusste ich nicht</button>
+              <button class="btn" (click)="nextCard()" [disabled]="!currentSet || flashcards.length === 0">Wusste ich nicht</button>
             </div>
           </div>
         </div>

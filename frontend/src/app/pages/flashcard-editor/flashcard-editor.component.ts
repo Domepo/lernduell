@@ -152,4 +152,21 @@ export class FlashcardComponent implements OnInit {
     // Schicke ein deleteCard-Event an den Server
     this.socketService.emit('deleteCard', { id: card.id });
   }
+
+  toggleMark(card: Flashcard): void {
+    card.marked = !card.marked;
+  
+    // sofort speichern
+    this.socketService.emit('updateCard', {
+      id: card.id,
+      front: card.front,
+      back: card.back,
+      title: card.title,
+      creator: card.creator,
+      set_name: card.set_name,
+      timestamp: card.timestamp,
+      marked: card.marked
+    });
+  }
+  
 }

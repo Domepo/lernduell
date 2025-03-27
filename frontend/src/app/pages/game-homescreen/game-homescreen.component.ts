@@ -61,7 +61,7 @@ export class GameHomescreenComponent implements OnInit {
                 creator: card[4],
                 set_name: card[5],
                 timestamp: card[6],
-                marked: card[7]
+                marked: card[7] ?? false
               });
               this.totalCards = this.flashcards.length;
             }
@@ -88,7 +88,10 @@ export class GameHomescreenComponent implements OnInit {
   }
 
   nextCard() {
-
+  // Sicherheits-Check: Kein Set oder keine Karten geladen
+  if (!this.currentSet || this.flashcards.length === 0) {
+    return; // Keine Aktion
+  }
     this.currentCardIndex++;
     this.showFront = true;
 

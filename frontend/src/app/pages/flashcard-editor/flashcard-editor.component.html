@@ -48,7 +48,11 @@
             <div class="mt-4 text-center button-container">
               <button (click)="saveCard(card)">Speichern</button>
               <button class="btn btn-danger ms-2" (click)="deleteCard(card)">Löschen</button>
+              <button class="btn btn-warning" (click)="toggleMark(selectedCard)">
+                {{ selectedCard.marked ? 'Markierung entfernen' : 'Karte markieren' }}
+              </button>
             </div>
+            
       </div>
     </div>
   </div>
